@@ -14,7 +14,7 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
     setEdit(!edit)
   }
   useEffect(()=>{
-    document.querySelector(".user-gender").focus()
+    document.querySelector(".user-name").focus()
    
   })
  
@@ -45,6 +45,7 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
     }
   const proStyle = {color:proColor }
   const proBStyle = {backgroundColor:proColor }
+  const userNameEl= useRef(null)
   const genderEl = useRef(null)
   const dateOfBirthEl = useRef(null)
   const originEl = useRef(null)
@@ -60,6 +61,7 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
     setIsError(false)
 
     const updatedUserData ={
+      userName:userNameEl.current.value,
       gender: genderEl.current.value || userProfileData.gender,
       dateOfBirth:dateOfBirthEl.current.value || userProfileData.dateOfBirth,
       origin:originEl.current.value || userProfileData.origin, 
@@ -112,7 +114,6 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
             <div id="user-bc" style={proBStyle}></div>
             <div className="user-photo"><i className="fa-solid fa-user" style={proStyle}></i></div>
             <div className="user-edit-btn" onClick={editHandler}><i className="fa-solid fa-pen-to-square"  style={proStyle}></i></div>
-            <div className="user-name font">{userProfileData.firstName} {userProfileData.lastName}</div>
             <div className="user-gender-icon font">
               {gender==="male"?
               
@@ -134,6 +135,7 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
             onClick={userDataUpdateHandler}>Save</button>
 
             {edit? <>
+              <input className="user-name font user-profile-input" ref={userNameEl} type="text" placeholder={userProfileData.userName || "User name"}/>
               <input className='user-gender font user-profile-input' ref={genderEl} type="text"  placeholder={userProfileData.gender || "Male / Female"}/>
               <input className="user-birthday font user-profile-input" ref={dateOfBirthEl} type="text" placeholder={userDateOfBirth || "yyyy-mm-dd"}/>
               <input className="user-location font user-profile-input" ref={originEl} type="text" placeholder={userProfileData.origin || "Origin"}/>
@@ -141,7 +143,7 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
   
               
             </> :<>
-           
+            <div className="user-name font">{userProfileData.userName}</div>
             <div className="user-gender font" onClick={noticeHandler}>{userProfileData.gender || <p className='not-entered'>not entered</p>}</div>
             <div className="user-birthday font" onClick={noticeHandler}>{userDateOfBirth || <p className='not-entered'>not entered</p>}</div>
             <div className="user-location font" onClick={noticeHandler}>{userProfileData.origin  || <p className='not-entered'>not entered</p>} </div>
