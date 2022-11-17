@@ -74,7 +74,7 @@
 .personal-data > input {
     color: #023c3d;
 }
-.personal-data >div , button , input{
+.personal-data >div , .user-profile-save-btn , .user-profile-input{
     display: flex;
     justify-content: center;
     align-items: center;
