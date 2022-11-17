@@ -61,7 +61,7 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
     setIsError(false)
 
     const updatedUserData ={
-      userName:userNameEl.current.value,
+      userName:userNameEl.current.value || userProfileData.userName,
       gender: genderEl.current.value || userProfileData.gender,
       dateOfBirth:dateOfBirthEl.current.value || userProfileData.dateOfBirth,
       origin:originEl.current.value || userProfileData.origin, 
