@@ -29,6 +29,18 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
   setProColor(localStorage.getItem("color"))
  },[])
 
+ 
+useEffect(()=>{
+  const navEl =  document.querySelectorAll(".user-pro-color")
+  navEl.forEach(el=> {
+  
+  el.addEventListener("mouseenter",()=>{el.style.color=userProfileColor})
+  el.addEventListener("mouseleave",()=>{el.style.color="#8b8b8b"})
+
+})
+},[userProfileColor])
+
+
     function proStyleHandler (e){
       if(edit && localStorage.getItem("color")){
        localStorage.setItem("color", e.target.id)
@@ -91,22 +103,22 @@ function UserProfile({userProfileData,isAuth,isLoading,setError,error,userDateOf
 
     <div className={isLoading || profileLoading ?  "user-profile-opacity" : "user-profile"}>
         <section className='options-list'>
-            <div className="user-my-profile">
+            <div className="user-my-profile user-pro-color">
             <i className="fa-solid fa-user" style={proStyle}></i>
             <div>My profile</div>
             </div>
-            <div className="user-purchase">
+            <div className="user-purchase user-pro-color">
             <i className="fa-solid fa-bag-shopping" style={{color:"coral"}}></i>
             <div>Purchase</div>
             </div>
-            <div className="user-certificate">
+            <div className="user-certificate user-pro-color">
             <i className="fa-solid fa-graduation-cap" style={{color:"black"}}></i>
             <div>Certificate</div>
             </div>
-            <div className="user-setting">
+           {/*  <div className="user-setting">
             <i className="fa-solid fa-gear" ></i>
             <div>setting</div>
-            </div>
+            </div> */}
 
         </section>  
         <section className='personal-data'>
