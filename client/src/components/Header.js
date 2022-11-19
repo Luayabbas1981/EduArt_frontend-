@@ -4,6 +4,7 @@ import "./Header.css"
 
 
 
+
 function Header({isAuth,logout}) {
 
   const [showUserPro,setShowUserPro] = useState(false)
@@ -14,13 +15,20 @@ function Header({isAuth,logout}) {
     document.querySelector("#user-profile-list").removeAttribute("class","hide-user-profile-list")
     setShowUserPro(!showUserPro)
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   useEffect(()=>{
 
     if (!isAuth)  {document.querySelector("#user-profile-list").setAttribute("class","hide-user-profile-list")}
      setShowUserPro(false) 
   },[isAuth])
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> main
   function hideUserProHandler (){
     setShowUserPro(false)
     document.querySelector("#alarm").setAttribute("class","alarm")
@@ -46,7 +54,10 @@ useEffect(()=>{
   document.querySelector("#user-profile-list").setAttribute("class","hide-user-profile-list")
 },[])
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   return (
   <div className='header' >
    
@@ -75,7 +86,7 @@ useEffect(()=>{
     <div className="navy-login user-pro-color" onClick={logout }>{isAuth? "Logoout":"Login"}</div>
       </NavLink>
 
-      <NavLink className="nav-link" to="login">
+      <NavLink className="nav-link" to="/about">
 
 <div className="navy-login user-pro-color">About us</div>
   </NavLink>
@@ -92,4 +103,4 @@ useEffect(()=>{
   )
 }
 
-export default Header
+export default Header;

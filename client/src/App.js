@@ -1,10 +1,6 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
- 
-} from "react-router-dom";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { isExpired, decodeToken } from "react-jwt";
 import "./App.css";
@@ -14,8 +10,10 @@ import CourseList from "./components/CourseList/CourseList";
 import CoursePage from "./components/CoursePage/CoursePage";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import AboutUs from "./components/AboutUs/AboutUs";
 import UserProfile from "./components/UserProfile/UserProfile";
 import axios from "axios";
+
 
 export const MyContext = React.createContext(null);
 
@@ -112,8 +110,13 @@ function App() {
             element={<CoursePage isAuth={isAuth} />}
           />
 
+
+          
+          <Route path={"/about"} element={<AboutUs />} />
+
          <Route path={"/register"} element={<Register />} />
           <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isAuth={isAuth} isLoading={isLoading} error={error} setError={setError} userDateOfBirth={userDateOfBirth} gender={gender}/>} />
+
         </Routes>
       </Router>
     </MyContext.Provider>
