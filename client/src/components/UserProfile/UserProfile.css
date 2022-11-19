@@ -75,15 +75,6 @@
 .personal-data > input {
   color: #023c3d;
 }
-<<<<<<< HEAD
-.personal-data >div , .user-profile-save-btn , .user-profile-input{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem;
-    -webkit-border-radius: 1rem;
-    -moz-border-radius: 1rem;
-=======
 .personal-data > div,
 .user-profile-save-btn,
 .user-profile-input {
@@ -93,7 +84,6 @@
   border-radius: 1rem;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
->>>>>>> main
 }
 
 #user-bc {
