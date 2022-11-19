@@ -15,20 +15,12 @@ function Header({isAuth,logout}) {
     document.querySelector("#user-profile-list").removeAttribute("class","hide-user-profile-list")
     setShowUserPro(!showUserPro)
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> main
   useEffect(()=>{
 
     if (!isAuth)  {document.querySelector("#user-profile-list").setAttribute("class","hide-user-profile-list")}
      setShowUserPro(false) 
   },[isAuth])
-<<<<<<< HEAD
-
-=======
   
->>>>>>> main
   function hideUserProHandler (){
     setShowUserPro(false)
     document.querySelector("#alarm").setAttribute("class","alarm")
@@ -54,10 +46,6 @@ useEffect(()=>{
   document.querySelector("#user-profile-list").setAttribute("class","hide-user-profile-list")
 },[])
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
   return (
   <div className='header' >
    
