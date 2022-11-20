@@ -59,6 +59,8 @@
   -webkit-filter: blur(0px);
 }
 
+/* My profile CSS */
+
 .personal-data {
   width: 900px;
   height: 650px;
@@ -254,3 +256,5 @@
     scale: 1;
   }
 }
+
+/* Purchase CSS */

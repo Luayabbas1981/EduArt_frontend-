@@ -12,6 +12,7 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import AboutUs from "./components/AboutUs/AboutUs";
 import UserProfile from "./components/UserProfile/UserProfile";
+import Purchase from "./components/UserProfile/Purchase";
 import axios from "axios";
 
 
@@ -115,7 +116,8 @@ function App() {
           <Route path={"/about"} element={<AboutUs />} />
 
          <Route path={"/register"} element={<Register />} />
-          <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isAuth={isAuth} isLoading={isLoading} error={error} setError={setError} userDateOfBirth={userDateOfBirth} gender={gender}/>} />
+         <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isAuth={isAuth} isLoading={isLoading} error={error} setError={setError} userDateOfBirth={userDateOfBirth} gender={gender}/>} />
+          <Route path={"/purchase"} element={<Purchase userProfileData={userProfileData} isAuth={isAuth} />} />
 
         </Routes>
       </Router>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "./UserProfile.css";
 
@@ -15,7 +16,7 @@ function UserProfile({
   const [profileLoading, setProfileLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [proColor, setProColor] = useState("");
-
+  const navigate = useNavigate()
   function editHandler() {
     document
       .querySelector(".user-edit-btn")
@@ -107,11 +108,11 @@ function UserProfile({
       }
     >
       <section className="options-list">
-        <div className="user-my-profile user-pro-color">
+        <div className="user-my-profile user-pro-color" >
           <i className="fa-solid fa-user" style={proStyle}></i>
           <div>My profile</div>
         </div>
-        <div className="user-purchase user-pro-color">
+        <div className="user-purchase user-pro-color" onClick={()=>navigate("/purchase")}>
           <i
             className="fa-solid fa-bag-shopping"
             style={{ color: "coral" }}
