@@ -17,6 +17,7 @@ function UserProfile({
   const [isError, setIsError] = useState(false);
   const [proColor, setProColor] = useState("");
   const navigate = useNavigate()
+ 
   function editHandler() {
     document
       .querySelector(".user-edit-btn")
@@ -176,23 +177,23 @@ function UserProfile({
         </div>
         <div className="user-profile-color font">User profile color</div>
         <div
-          id="dodgerblue"
-          className="colors dodgerblue"
+          id="#f684b7"
+          className="colors cherry"
           onClick={proStyleHandler}
         ></div>
         <div
-          id="lightpink"
-          className="colors lightpink"
+          id="#66baf1"
+          className="colors lightblue"
           onClick={proStyleHandler}
         ></div>
         <div
-          id="lightsteelblue"
-          className="colors lightsteelblue"
+          id="#a1b6d3"
+          className="colors light-steel-blue"
           onClick={proStyleHandler}
         ></div>
         <div
-          id="violet"
-          className="colors violet"
+          id="#67c2d9"
+          className="colors sea"
           onClick={proStyleHandler}
         ></div>
         <button

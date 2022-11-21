@@ -24,6 +24,7 @@ export default function CourseList() {
       setSlidesCount(apiData.data.length);
       setLoading(false);
       setHasError(false);
+      console.log("hi",`${baseURL}${apiData.data[0].courseImage}`)
     } catch (error) {
       setLoading(false);
       setHasError(true);

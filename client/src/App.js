@@ -60,8 +60,18 @@ function App() {
               setUserProfileData(userDetails.data)
               setIsLoading(false)
                 localStorage.setItem("color",userDetails.data.profileColour)
-                setUserDateOfBirth((userDetails.data.dateOfBirth).slice(0,10))
-                setGender(userDetails.data.gender)
+
+                if(userDetails.data.dateOfBirth){
+                  setUserDateOfBirth((userDetails.data.dateOfBirth).slice(0,10))
+                  } else{
+                    return
+                }
+                if(userDetails.data.gender){
+                  setGender(userDetails.data.gender)                
+                  } else{
+                    return
+                  }
+
             }catch (error) {
               setIsLoading(false); 
               setError( true);
@@ -74,7 +84,7 @@ function App() {
     }
   },[isAuth])
 
-  console.log(userProfileData)
+  console.log("userProfileData",userProfileData)
   
 
   useEffect(() => {
@@ -117,7 +127,7 @@ function App() {
 
          <Route path={"/register"} element={<Register />} />
          <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isAuth={isAuth} isLoading={isLoading} error={error} setError={setError} userDateOfBirth={userDateOfBirth} gender={gender}/>} />
-          <Route path={"/purchase"} element={<Purchase userProfileData={userProfileData} isAuth={isAuth} />} />
+          <Route path={"/purchase"} element={<Purchase userProfileData={userProfileData} isAuth={isAuth} isLoading={isLoading} error={error} />} />
 
         </Routes>
       </Router>
