@@ -137,6 +137,9 @@ function UserProfile({
         <div className="user-photo">
           <i className="fa-solid fa-user" style={proStyle}></i>
         </div>
+        <div className="user-photo-edit-btn">
+        <i className="fa-solid fa-pen-to-square" style={proStyle}></i>
+        </div>
         <div className="user-edit-btn" onClick={editHandler}>
           <i className="fa-solid fa-pen-to-square" style={proStyle}></i>
         </div>
