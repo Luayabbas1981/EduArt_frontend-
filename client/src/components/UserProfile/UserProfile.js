@@ -233,7 +233,7 @@ function UserProfile({
           </>
         ) : (
           <>
-          <div className="user-name font">{userProfileData.userName}</div>
+          <div className="user-name font" onClick={noticeHandler}>{userProfileData.userName}</div>
             <div className="user-gender font" onClick={noticeHandler}>
               {userProfileData.gender || (
                 <p className="not-entered">not entered</p>
