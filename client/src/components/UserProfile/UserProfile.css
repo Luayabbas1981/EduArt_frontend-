@@ -227,7 +227,8 @@
 .user-profile-save-btn {
   grid-column: 13/15;
   grid-row: 15/16;
-  background-color: #eaf4fc;
+  background-color: #f2f7f8;
+  border:2px solid;
   font-size: 22px;
   font-weight: bold;
 }
@@ -270,6 +271,16 @@
 #edit-btn-id {
   animation: scale 1s alternate linear infinite;
   -webkit-animation: scale 1s alternate linear infinite;
+}
+#shake-btn{
+  animation:  shake-btn  1.8s 4 alternate  ;
+  -webkit-animation:  shake-btn  1.8s 4 alternate  ;
+}
+@keyframes shake-btn {
+ 
+  to{
+    rotate:x 360deg;
+  }
 }
 @keyframes scale {
   from {

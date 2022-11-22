@@ -32,7 +32,15 @@ function purchaseHandler(){
   setMyProfile(false)
   setPurchase(true)
 }
+
+function setImageHandler(e){
+  e.preventDefault()
+  setImage(e.target.files[0])
+  document.querySelector(".user-profile-save-btn").setAttribute("id","shake-btn")
+  
+}
  async function uploadImage (){
+  document.querySelector(".user-profile-save-btn").removeAttribute("id","shake-btn")
     const formData = new FormData()
     formData.append("file",image)
     formData.append("upload_preset","eduart")
@@ -65,6 +73,7 @@ function purchaseHandler(){
       }
     
   }
+  
 
   useEffect(()=>{
     uploadUserImage()
@@ -197,11 +206,9 @@ function purchaseHandler(){
       :<i className="fa-solid fa-user" style={proStyle}></i>
       }
         </div>
-        <div className="user-photo-edit-btn">
+        <div className="user-photo-edit-btn" >
         <i className="fa-solid fa-pen-to-square" style={proStyle}></i>
-          <input className="user-photo-edit-input" type="file" onChange={(e)=> {
-            e.preventDefault()
-            setImage(e.target.files[0])}}/>
+          <input className="user-photo-edit-input" type="file" onChange={setImageHandler}/>
         </div>
         <div className="user-edit-btn" onClick={editHandler}>
           <i className="fa-solid fa-pen-to-square" style={proStyle}></i>
