@@ -6,7 +6,6 @@ import "./UserProfile.css";
 
 function UserProfile({
   userProfileData,
-  isAuth,
   isLoading,
   setError,
   error,
