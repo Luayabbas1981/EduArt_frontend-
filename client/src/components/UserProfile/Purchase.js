@@ -60,7 +60,7 @@ function Purchase({isAuth,userProfileData,isLoading,error}) {
                {userPurchase? userPurchase.map((el)=>{
               return(
                 <div className='my-purchase' key={el._id} style={{backgroundColor:userProfileColor}}>
-                  <div className='purchase-id'>Purchase id :{(el._id)}</div>
+                  <div className='purchase-invoiceNumber'>invoiceNumber :{(el.invoiceNumber)}</div>
                   <div className='purchase-course-name'>Course name : {el.purchasedCourse.courseName}</div>
                   <div className="purchase-course-active">{el.purchasedCourse.courseActive?"Course active : yes":"Course active : no"}</div>
                   <div className='purchase-course-img'>{ <img src={`${baseURL}${el.purchasedCourse.courseImage}`} alt="" /> }</div>

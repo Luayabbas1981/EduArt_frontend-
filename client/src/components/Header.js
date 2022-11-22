@@ -71,7 +71,7 @@ useEffect(()=>{
       </NavLink>
       <NavLink className="nav-link" to={isAuth?"/":"login"}>
 
-    <div className="navy-login user-pro-color" onClick={logout }>{isAuth? "Logoout":"Login"}</div>
+    <div className="navy-login user-pro-color" onClick={logout }>{isAuth? "Logout":"Login"}</div>
       </NavLink>
 
       <NavLink className="nav-link" to="/about">

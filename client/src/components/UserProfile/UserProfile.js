@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import {useNavigate} from "react-router-dom";
+import {Image} from "cloudinary-react"
 import axios from "axios";
 import "./UserProfile.css";
 
@@ -16,8 +17,49 @@ function UserProfile({
   const [profileLoading, setProfileLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [proColor, setProColor] = useState("");
+  const [image,setImage]=useState(null)
+  const [imageData,setImageData]=useState({})
   const navigate = useNavigate()
- 
+
+ async function uploadImage (){
+    const formData = new FormData()
+    formData.append("file",image)
+    formData.append("upload_preset","eduart")
+   
+    try{
+
+   const res = await axios.post("https://api.cloudinary.com/v1_1/dqukw0qgs/upload",formData)
+   const data = await res.data
+       setImageData(data)
+    }catch(error){
+      console.log("error",error)
+    }
+  }
+
+  async function uploadUserImage (){
+    
+
+      const userUploadImage = {
+        userImage:imageData.public_id 
+      }
+     
+      try{
+        await axios.patch(
+          `http://localhost:4000/user/${localStorage.getItem("userId")}`,
+          userUploadImage
+        );
+         
+      }catch(error){
+        console.log(error)
+      }
+    
+  }
+
+  useEffect(()=>{
+    uploadUserImage()
+   
+  },[imageData])
+  
   function editHandler() {
     document
       .querySelector(".user-edit-btn")
@@ -134,11 +176,20 @@ function UserProfile({
       </section>
       <section className="personal-data">
         <div id="user-bc" style={proBStyle}></div>
-        <div className="user-photo">
-          <i className="fa-solid fa-user" style={proStyle}></i>
+        <div className="user-photo">{localStorage.getItem("imgId") ?
+        <Image className="user-upload-image"
+        cloudName= "dqukw0qgs"
+        publicId = {localStorage.getItem("imgId") 
+        }
+        />
+        :<i className="fa-solid fa-user" style={proStyle}></i>
+      }
         </div>
         <div className="user-photo-edit-btn">
         <i className="fa-solid fa-pen-to-square" style={proStyle}></i>
+          <input className="user-photo-edit-input" type="file" onChange={(e)=> {
+            e.preventDefault()
+            setImage(e.target.files[0])}}/>
         </div>
         <div className="user-edit-btn" onClick={editHandler}>
           <i className="fa-solid fa-pen-to-square" style={proStyle}></i>
@@ -202,7 +253,7 @@ function UserProfile({
         <button
           className="user-profile-save-btn"
           style={proStyle}
-          onClick={userDataUpdateHandler}
+          onClick={edit?userDataUpdateHandler:uploadImage}
         >
           Save
         </button>
