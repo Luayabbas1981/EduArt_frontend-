@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import {useNavigate} from "react-router-dom";
 import {Image} from "cloudinary-react"
 import axios from "axios";
+import Purchase from "./Purchase";
 import "./UserProfile.css";
 
 function UserProfile({
@@ -13,14 +13,26 @@ function UserProfile({
   userDateOfBirth,
   gender,
 }) {
+  
+  const [myProfile,setMyProfile]=useState(true)
+  const [purchase,setPurchase]=useState(false)
   const [edit, setEdit] = useState(false);
   const [profileLoading, setProfileLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [proColor, setProColor] = useState("");
+  const [userImg,setUserImg] = useState("")
   const [image,setImage]=useState(null)
   const [imageData,setImageData]=useState({})
-  const navigate = useNavigate()
 
+  function myProfileHandler (){
+    setMyProfile(true)
+    setPurchase(false)
+  }
+  
+function purchaseHandler(){
+  setMyProfile(false)
+  setPurchase(true)
+}
  async function uploadImage (){
     const formData = new FormData()
     formData.append("file",image)
@@ -57,7 +69,7 @@ function UserProfile({
 
   useEffect(()=>{
     uploadUserImage()
-   
+   setUserImg(imageData.public_id || localStorage.getItem("imgId")) 
   },[imageData])
   
   function editHandler() {
@@ -67,7 +79,8 @@ function UserProfile({
     setEdit(!edit);
   }
   useEffect(() => {
-    document.querySelector(".user-gender").focus();
+    if(myProfile) document.querySelector(".user-gender").focus();
+   
   });
 
   const userProfileColor = localStorage.getItem("color");
@@ -151,11 +164,11 @@ function UserProfile({
       }
     >
       <section className="options-list">
-        <div className="user-my-profile user-pro-color" >
+        <div className="user-my-profile user-pro-color" onClick={myProfileHandler}>
           <i className="fa-solid fa-user" style={proStyle}></i>
           <div>My profile</div>
         </div>
-        <div className="user-purchase user-pro-color" onClick={()=>navigate("/purchase")}>
+        <div className="user-purchase user-pro-color" onClick={purchaseHandler}>
           <i
             className="fa-solid fa-bag-shopping"
             style={{ color: "coral" }}
@@ -169,20 +182,18 @@ function UserProfile({
           ></i>
           <div>Certificate</div>
         </div>
-       {/*  <div className="user-setting">
-          <i className="fa-solid fa-gear"></i>
-          <div>setting</div>
-        </div> */}
       </section>
+
+      {myProfile?
       <section className="personal-data">
         <div id="user-bc" style={proBStyle}></div>
         <div className="user-photo">{localStorage.getItem("imgId") ?
         <Image className="user-upload-image"
         cloudName= "dqukw0qgs"
-        publicId = {localStorage.getItem("imgId") 
-        }
-        />
-        :<i className="fa-solid fa-user" style={proStyle}></i>
+        publicId = { userImg || localStorage.getItem("imgId") 
+      }
+      />
+      :<i className="fa-solid fa-user" style={proStyle}></i>
       }
         </div>
         <div className="user-photo-edit-btn">
@@ -199,64 +210,65 @@ function UserProfile({
         </div>
         <div className="user-gender-icon font">
           {gender === "male" ? (
-            <i className="fa-solid fa-mars gender-icon"></i>
-          ) : (
-            <i className="fa-solid fa-venus gender-icon"></i>
-          )}
+            <i className="fa-solid fa-mars gender-icon" style={proStyle}></i>
+            ) : (
+              <i className="fa-solid fa-venus gender-icon" style={proStyle}></i>
+              )}
         </div>
         <div className="user-birthday-icon font">
           <i
             className="fa-solid fa-calendar-days"
             style={{ color: "darkblue" }}
-          ></i>
+            ></i>
         </div>
         <div className="user-location-icon">
           {" "}
           <i
             className="fa-solid fa-globe"
             style={{ color: "lightseagreen" }}
-          ></i>
+            ></i>
         </div>
         <div className="user-tel-icon">
           <i
             className="fa-solid fa-phone"
             style={{ color: "lightslategray" }}
-          ></i>
+            ></i>
         </div>
         <div className="user-profile-color-icon font">
           <i
             className="fa-solid fa-palette"
             style={{ color: "darkorange" }}
-          ></i>
+            ></i>
         </div>
         <div className="user-profile-color font">User profile color</div>
         <div
           id="#f684b7"
           className="colors cherry"
           onClick={proStyleHandler}
-        ></div>
+          ></div>
         <div
           id="#66baf1"
           className="colors lightblue"
           onClick={proStyleHandler}
-        ></div>
+          ></div>
         <div
           id="#a1b6d3"
           className="colors light-steel-blue"
           onClick={proStyleHandler}
-        ></div>
+          ></div>
         <div
           id="#67c2d9"
           className="colors sea"
           onClick={proStyleHandler}
-        ></div>
+          ></div>
         <button
           className="user-profile-save-btn"
           style={proStyle}
           onClick={edit?userDataUpdateHandler:uploadImage}
-        >
+          >
           Save
         </button>
+        
 
         {edit ? (
           <>
@@ -309,7 +321,9 @@ function UserProfile({
             </div>{" "}
           </>
         )}
-      </section>
+      </section>:""}
+
+      {purchase? <Purchase userProfileData={userProfileData} userImg={userImg}/>:""}
       {isLoading || profileLoading ? (
         <div className="profile-loading">loading...</div>
       ) : (

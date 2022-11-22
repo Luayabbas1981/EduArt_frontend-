@@ -51,7 +51,6 @@ function Login({ handelSuccessfullLogin, isAuth }) {
       }
     } catch (error) {
       setLoginLoading(false);
-      /*  console.error("Error while sending with axios", error); */
       setError(error);
       return;
     }
