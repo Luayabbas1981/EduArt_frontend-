@@ -78,8 +78,10 @@ function purchaseHandler(){
       .removeAttribute("id", "edit-btn-id");
     setEdit(!edit);
   }
+
+  
   useEffect(() => {
-    if(myProfile) document.querySelector(".user-gender").focus();
+    if(edit) document.querySelector("#user").focus();
    
   });
 
@@ -272,7 +274,7 @@ function purchaseHandler(){
 
         {edit ? (
           <>
-           <input className="user-name font user-profile-input" ref={userNameEl} type="text" placeholder={userProfileData.userName || "User name"}/>
+           <input id="user" className="user-name font user-profile-input" ref={userNameEl} type="text" placeholder={userProfileData.userName || "User name"}/>
             <input
               className="user-gender font user-profile-input"
               ref={genderEl}
