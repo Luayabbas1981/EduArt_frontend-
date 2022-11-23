@@ -23,9 +23,6 @@ function UserProfile({
   const [image,setImage]=useState(null)
   const [imageData,setImageData]=useState({})
 
-
-  console.log("image",image)
- 
   function myProfileHandler (){
     setMyProfile(true)
     setPurchase(false)
@@ -43,7 +40,6 @@ function setImageHandler(e){
   
 }
  async function uploadImage (){
-  setImage(null)
   document.querySelector(".user-profile-save-btn").removeAttribute("id","shake-btn")
     const formData = new FormData()
     formData.append("file",image)
@@ -54,7 +50,6 @@ function setImageHandler(e){
    const res = await axios.post("https://api.cloudinary.com/v1_1/dqukw0qgs/upload",formData)
    const data = await res.data
        setImageData(data)
-     
     }catch(error){
       console.log("error",error)
     }
@@ -202,14 +197,13 @@ function setImageHandler(e){
       {myProfile?
       <section className="personal-data">
         <div id="user-bc" style={proBStyle}></div>
-       
-        <div className="user-photo">{image !== null?  <img className="user-upload-image" src={URL.createObjectURL(image)} alt="" /> : localStorage.getItem("imgId") ?
+        <div className="user-photo">{localStorage.getItem("imgId") ?
         <Image className="user-upload-image"
         cloudName= "dqukw0qgs"
         publicId = { userImg || localStorage.getItem("imgId") 
       }
       />
-        :<i className="fa-solid fa-user" style={proStyle}></i>
+      :<i className="fa-solid fa-user" style={proStyle}></i>
       }
         </div>
         <div className="user-photo-edit-btn" >

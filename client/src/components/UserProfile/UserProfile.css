@@ -269,8 +269,8 @@
   padding-left: 10px;
 }
 #edit-btn-id {
-  animation: scale .7s 6 alternate linear;
-  -webkit-animation: scale .7s 6 alternate linear;
+  animation: scale 1s alternate linear infinite;
+  -webkit-animation: scale 1s alternate linear infinite;
 }
 #shake-btn {
   animation: shake-btn 1.8s 4 alternate;
