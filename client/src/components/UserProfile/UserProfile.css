@@ -25,8 +25,9 @@
   -moz-border-radius: 2rem;
 }
 .options-list > div {
-  width: 100%;
+ width: 80%;
   display: flex;
+  justify-content: center;
   column-gap: 25px;
   font-size: x-large;
   font-weight: 900;
@@ -44,7 +45,7 @@
 }
 .options-list > div:hover {
   filter: blur(0px);
-  scale: 1.2;
+  scale: 1.1;
   color: #2d7a82;
   background-color: #eee;
   padding: 0.6rem 0.8rem;
