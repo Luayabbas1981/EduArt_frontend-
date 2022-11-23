@@ -59,7 +59,7 @@ function App() {
               setUserProfileData(userDetails.data)
               setIsLoading(false)
               localStorage.setItem("color",userDetails.data.profileColour)
-             /*  localStorage.setItem("imgId",userDetails.data.userImage || "") */
+               localStorage.setItem("imgId",userDetails.data.userImage || "") 
 
                 if(userDetails.data.dateOfBirth){
                   setUserDateOfBirth((userDetails.data.dateOfBirth).slice(0,10))
