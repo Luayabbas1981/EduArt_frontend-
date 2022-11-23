@@ -38,7 +38,7 @@ function purchaseHandler(){
 
 function setImageHandler(e){
   e.preventDefault()
-  setImage(e.target.files[0])
+  setImage(e.target.files[0] || null)
   document.querySelector(".user-profile-save-btn").setAttribute("id","shake-btn")
   
 }
