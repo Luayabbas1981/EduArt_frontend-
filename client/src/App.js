@@ -57,6 +57,7 @@ function App() {
                 setIsLoading(true)
               const userDetails = await axios.get(`http://localhost:4000/user/${localStorage.getItem("userId")}`)
               setUserProfileData(userDetails.data)
+              console.log("userProfileData",userProfileData)
               setIsLoading(false)
               localStorage.setItem("color",userDetails.data.profileColour)
                localStorage.setItem("imgId",userDetails.data.userImage || "") 
