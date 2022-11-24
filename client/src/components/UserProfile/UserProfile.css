@@ -25,7 +25,7 @@
   -moz-border-radius: 2rem;
 }
 .options-list > div {
- width: 80%;
+  width: 80%;
   display: flex;
   justify-content: center;
   column-gap: 25px;
@@ -181,7 +181,7 @@
   font-size: 30px;
 }
 .user-profile-color {
-  grid-column: 3/9;
+  grid-column: 3/8;
   grid-row: 12/13;
   background-color: var(--b-c);
 }
@@ -189,8 +189,24 @@
   grid-column: 2/3;
   grid-row: 12/13;
   font-size: 30px;
-  color: mediumvioletred;
 }
+.user-password {
+  position: relative;
+  grid-column: 10/15;
+  grid-row: 12/13;
+  background-color: var(--b-c);
+}
+.user-password p {
+  position: absolute;
+  top: -165%;
+  font-size: 50px;
+}
+.user-password-icon {
+  grid-column: 9/10;
+  grid-row: 12/13;
+  font-size: 30px;
+}
+
 .cherry {
   cursor: pointer;
   grid-column: 4/5;
@@ -269,8 +285,8 @@
   padding-left: 10px;
 }
 #edit-btn-id {
-  animation: scale 1s alternate linear infinite;
-  -webkit-animation: scale 1s alternate linear infinite;
+  animation: scale 0.7s 6 alternate linear;
+  -webkit-animation: scale 0.7s 6 alternate linear;
 }
 #shake-btn {
   animation: shake-btn 1.8s 4 alternate;
@@ -301,10 +317,8 @@
   font-size: 25px;
   display: flex;
   flex-direction: column;
-  
- 
 }
-.purchase-container{
+.purchase-container {
   padding: 1rem 0rem;
   overflow-y: auto;
   display: flex;

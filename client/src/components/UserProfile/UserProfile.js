@@ -17,11 +17,13 @@ function UserProfile({
   const [purchase,setPurchase]=useState(false)
   const [edit, setEdit] = useState(false);
   const [profileLoading, setProfileLoading] = useState(false);
+  const [newUpdatedData,setNewUpdatedData] = useState({})
   const [isError, setIsError] = useState(false);
   const [proColor, setProColor] = useState("");
   const [userImg,setUserImg] = useState("")
   const [image,setImage]=useState(null)
   const [imageData,setImageData]=useState({})
+ 
 
   function myProfileHandler (){
     setMyProfile(true)
@@ -40,6 +42,7 @@ function setImageHandler(e){
   
 }
  async function uploadImage (){
+  setImage(null)
   document.querySelector(".user-profile-save-btn").removeAttribute("id","shake-btn")
     const formData = new FormData()
     formData.append("file",image)
@@ -50,6 +53,7 @@ function setImageHandler(e){
    const res = await axios.post("https://api.cloudinary.com/v1_1/dqukw0qgs/upload",formData)
    const data = await res.data
        setImageData(data)
+     
     }catch(error){
       console.log("error",error)
     }
@@ -63,18 +67,19 @@ function setImageHandler(e){
       }
      
       try{
-        await axios.patch(
+       const sendNewImage =   await axios.patch(
           `http://localhost:4000/user/${localStorage.getItem("userId")}`,
           userUploadImage
         );
-         
+        localStorage.setItem("imgId",sendNewImage.data.userImg)
+        
       }catch(error){
         console.log(error)
       }
     
   }
   
-
+/* console.log("NewImageData",newImageData) */
   useEffect(()=>{
     uploadUserImage()
    setUserImg(imageData.public_id || localStorage.getItem("imgId")) 
@@ -133,6 +138,7 @@ function setImageHandler(e){
   const dateOfBirthEl = useRef(null);
   const originEl = useRef(null);
   const telEl = useRef(null);
+  const passwordEl = useRef(null)
 
   async function userDataUpdateHandler(e) {
     if (edit) {
@@ -149,23 +155,28 @@ function setImageHandler(e){
           telEl.current.value || userProfileData.telephoneLandLine,
         profileColour:
           localStorage.getItem("color") || userProfileData.profileColour,
+          password:passwordEl.current.value  ||  userProfileData.password
       };
 
       try {
         setProfileLoading(true);
-        await axios.patch(
+      const newUserData =  await axios.patch(
           `http://localhost:4000/user/${localStorage.getItem("userId")}`,
           updatedUserData
         );
-
+        setNewUpdatedData(newUserData.data)
+        
         setProfileLoading(false);
-        window.location.reload();
+          setEdit(false)
       } catch (error) {
+        console.log(error)
         setProfileLoading(false);
         setIsError(true);
       }
     }
   }
+console.log("newUpdatedData",newUpdatedData)
+  
 
   return (
     <div
@@ -197,13 +208,14 @@ function setImageHandler(e){
       {myProfile?
       <section className="personal-data">
         <div id="user-bc" style={proBStyle}></div>
-        <div className="user-photo">{localStorage.getItem("imgId") ?
+       
+        <div className="user-photo">{image !== null?  <img className="user-upload-image" src={URL.createObjectURL(image)} alt="" /> : localStorage.getItem("imgId") ?
         <Image className="user-upload-image"
         cloudName= "dqukw0qgs"
         publicId = { userImg || localStorage.getItem("imgId") 
       }
       />
-      :<i className="fa-solid fa-user" style={proStyle}></i>
+        :<i className="fa-solid fa-user" style={proStyle}></i>
       }
         </div>
         <div className="user-photo-edit-btn" >
@@ -213,9 +225,7 @@ function setImageHandler(e){
         <div className="user-edit-btn" onClick={editHandler}>
           <i className="fa-solid fa-pen-to-square" style={proStyle}></i>
         </div>
-        <div className="user-name font">
-          {userProfileData.firstName} {userProfileData.lastName}
-        </div>
+      
         <div className="user-gender-icon font">
           {gender === "male" ? (
             <i className="fa-solid fa-mars gender-icon" style={proStyle}></i>
@@ -241,6 +251,10 @@ function setImageHandler(e){
             className="fa-solid fa-phone"
             style={{ color: "lightslategray" }}
             ></i>
+        </div>
+        <div className="user-password-icon">
+        <i className="fa-solid fa-key" style={{ color: "royalblue" }}></i>
+
         </div>
         <div className="user-profile-color-icon font">
           <i
@@ -305,28 +319,30 @@ function setImageHandler(e){
               type="text"
               placeholder={userProfileData.telephoneLandLine || "Tel"}
             />
+            <input  className="user-password font user-profile-input" type="password" ref={passwordEl}/>
           </>
         ) : (
           <>
-          <div className="user-name font" onClick={noticeHandler}>{userProfileData.userName}</div>
+          <div className="user-name font" onClick={noticeHandler}> {newUpdatedData.userName ||  userProfileData.userName}</div>
             <div className="user-gender font" onClick={noticeHandler}>
-              {userProfileData.gender || (
+              { newUpdatedData.gender || userProfileData.gender || (
                 <p className="not-entered">not entered</p>
               )}
             </div>
             <div className="user-birthday font" onClick={noticeHandler}>
-              {userDateOfBirth || <p className="not-entered">not entered</p>}
+              { userDateOfBirth || <p className="not-entered">not entered</p>}
             </div>
             <div className="user-location font" onClick={noticeHandler}>
-              {userProfileData.origin || (
+              {  newUpdatedData.origin ||  userProfileData.origin || (
                 <p className="not-entered">not entered</p>
               )}{" "}
             </div>
             <div className="user-tel font" onClick={noticeHandler}>
-              {userProfileData.telephoneLandLine || (
+              { newUpdatedData.telephoneLandLine ||  userProfileData.telephoneLandLine || (
                 <p className="not-entered">not entered</p>
               )}
             </div>{" "}
+            <div className="user-password font"><p>...........</p></div>
           </>
         )}
       </section>:""}

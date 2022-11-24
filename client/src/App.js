@@ -49,45 +49,41 @@ function App() {
     
   };
 
- 
-
-    async function getUserDetalis(){
-            try{
-                setError(false)
-                setIsLoading(true)
-              const userDetails = await axios.get(`http://localhost:4000/user/${localStorage.getItem("userId")}`)
-              setUserProfileData(userDetails.data)
-              console.log("userProfileData",userProfileData)
-              setIsLoading(false)
-              localStorage.setItem("color",userDetails.data.profileColour)
-               localStorage.setItem("imgId",userDetails.data.userImage || "") 
-
-                if(userDetails.data.dateOfBirth){
-                  setUserDateOfBirth((userDetails.data.dateOfBirth).slice(0,10))
-                  } else{
-                    return
-                }
-                if(userDetails.data.gender){
-                  setGender(userDetails.data.gender)                
-                  } else{
-                    return
-                  }
-
-            }catch (error) {
-              setIsLoading(false); 
-              setError( true);
-              return 
-            }
-    }
   useEffect(()=>{
     if(isAuth){
-      getUserDetalis()
+      async function getUserDetails(){
+        try{
+            setError(false)
+            setIsLoading(true)
+          const userDetails = await axios.get(`http://localhost:4000/user/${localStorage.getItem("userId")}`)
+          setUserProfileData(userDetails.data)
+          console.log("userProfileData",userProfileData)
+          setIsLoading(false)
+          localStorage.setItem("color",userDetails.data.profileColour)
+           localStorage.setItem("imgId",userDetails.data.userImage || "") 
+
+            if(userDetails.data.dateOfBirth){
+              setUserDateOfBirth((userDetails.data.dateOfBirth).slice(0,10))
+              } else{
+                return
+            }
+            if(userDetails.data.gender){
+              setGender(userDetails.data.gender)                
+              } else{
+                return
+              }
+
+        }catch (error) {
+          setIsLoading(false); 
+          setError( true);
+          return 
+        }
+}
+      getUserDetails()
     }
   },[isAuth])
 
-  console.log("userProfileData",userProfileData)
   
-
   useEffect(() => {
     if (hasClientValidToken()) {
       setIsAuth(true);
