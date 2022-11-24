@@ -165,7 +165,6 @@ function setImageHandler(e){
           updatedUserData
         );
         setNewUpdatedData(newUserData.data)
-        
         setProfileLoading(false);
           setEdit(false)
       } catch (error) {

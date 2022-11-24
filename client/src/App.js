@@ -123,7 +123,7 @@ function App() {
           <Route path={"/about"} element={<AboutUs />} />
 
          <Route path={"/register"} element={<Register />} />
-         <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isLoading={isLoading} error={error} setError={setError} userDateOfBirth={userDateOfBirth} gender={gender}/>} />
+         <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isLoading={isLoading} error={error} setError={setError} userDateOfBirth={userDateOfBirth}  gender={gender}/>} />
           
 
         </Routes>
