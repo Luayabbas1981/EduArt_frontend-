@@ -294,13 +294,22 @@
 
 /* Purchase CSS */
 
-.purchase-container {
+.purchases-container {
+  height: 100%;
   grid-column: 2/15;
   grid-row: 5/15;
-  overflow-y: auto;
   font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  
+ 
 }
-
+.purchase-container{
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
 .my-purchase {
   width: 95%;
   height: 40%;

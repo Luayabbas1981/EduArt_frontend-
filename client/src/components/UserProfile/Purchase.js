@@ -33,7 +33,8 @@ function Purchase({userProfileData,userImg}) {
         :<i className="fa-solid fa-user" style={{color:userProfileColor}}></i>
       }
         </div>
-          <div className="purchase-container">
+          <div className="purchases-container">
+            <div className="purchase-container">
                {userPurchase? userPurchase.map((el)=>{
               return(
                 <div className='my-purchase' key={el._id} style={{backgroundColor:userProfileColor}}>
@@ -43,7 +44,7 @@ function Purchase({userProfileData,userImg}) {
                   <div className='purchase-course-img'>{ <img src={`${baseURL}${el.purchasedCourse.courseImage}`} alt="" /> }</div>
                 </div>
               )
-            }):"Sorry, you have no purchases"}  
+            }):"Sorry, you have no purchases"} </div> 
           </div>
       </section>
   
