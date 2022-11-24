@@ -305,6 +305,7 @@
  
 }
 .purchase-container{
+  padding: 1rem 0rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
