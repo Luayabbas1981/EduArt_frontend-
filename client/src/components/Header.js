@@ -53,7 +53,7 @@ useEffect(()=>{
    
     </div>
     <div className='navy' >
-      <div className="header-user-name">{userName?userName:"Hi"}</div>
+      <div className="header-user-name">{userName?userName:""}</div>
       <i className="fa-solid fa-user user-pro-color" id="user-profile" onClick={isAuth? shwoUserProHandler:hideUserProHandler}>
         <ul id="user-profile-list" className={showUserPro?"user-pro-ul":"hide-userPro-ul"}>
           
