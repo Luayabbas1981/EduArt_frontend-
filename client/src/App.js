@@ -23,6 +23,7 @@ function App() {
   const [userProfileData,setUserProfileData] = useState({})
   const [isLoading, setIsLoading] = useState(false); 
   const [error, setError] = useState(false); 
+  const [userName,setUserName]= useState("")
   const [gender,setGender]= useState("")
   const [userDateOfBirth,setUserDateOfBirth] = useState("")
      
@@ -61,7 +62,9 @@ function App() {
           setIsLoading(false)
           localStorage.setItem("color",userDetails.data.profileColour)
            localStorage.setItem("imgId",userDetails.data.userImage || "") 
-
+            if(userDetails.data.userName){
+              setUserName(userDetails.data.userName)
+            }
             if(userDetails.data.dateOfBirth){
               setUserDateOfBirth((userDetails.data.dateOfBirth).slice(0,10))
               } else{
@@ -96,7 +99,7 @@ function App() {
         <Header
           isAuth={isAuth}
           logout={logout} 
-   
+          userName={userName}
         />
 
         <Routes>

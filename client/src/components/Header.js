@@ -5,12 +5,12 @@ import "./Header.css"
 
 
 
-function Header({isAuth,logout}) {
+function Header({isAuth,logout,userName}) {
 
   const [showUserPro,setShowUserPro] = useState(false)
   const navigate = useNavigate()
 
- 
+
   function shwoUserProHandler (){
     document.querySelector("#user-profile-list").removeAttribute("class","hide-user-profile-list")
     setShowUserPro(!showUserPro)
@@ -53,6 +53,7 @@ useEffect(()=>{
    
     </div>
     <div className='navy' >
+      <div className="header-user-name">{userName?userName:"Hi"}</div>
       <i className="fa-solid fa-user user-pro-color" id="user-profile" onClick={isAuth? shwoUserProHandler:hideUserProHandler}>
         <ul id="user-profile-list" className={showUserPro?"user-pro-ul":"hide-userPro-ul"}>
           
