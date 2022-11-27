@@ -182,7 +182,7 @@ function setImageHandler(e){
           telEl.current.value || userProfileData.telephoneLandLine,
         profileColour:
           localStorage.getItem("color") || userProfileData.profileColour,
-           /* password:passwordEl.current.value  ||  ""  */
+            password:passwordEl.current.value  ||  ""  
                 
       };
 
@@ -319,7 +319,7 @@ console.log("newUpdatedData",newUpdatedData)
         <button
           className="user-profile-save-btn"
           style={proStyle}
-          onClick={edit?userDataUpdateHandler:uploadImage}
+          onClick={edit?userDataUpdateHandler : !edit? uploadImage :null}
           >
           Save
         </button>
