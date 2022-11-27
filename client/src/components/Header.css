@@ -116,6 +116,13 @@ i:hover,
 }
 .header-user-name{
   width: 250px;
+white-space: nowrap;
  overflow: hidden;
   text-overflow: ellipsis;
+}
+.header-user-name:hover{
+  overflow: visible;
+  word-break: break-word;
+  white-space: normal;
+  
 }

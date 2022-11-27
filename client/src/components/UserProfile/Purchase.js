@@ -35,7 +35,7 @@ function Purchase({userProfileData,imageData}) {
         </div>
           <div className="purchases-container">
             <div className="purchase-container">
-               {userPurchase? userPurchase.map((el)=>{
+               {userPurchase.length !== 0? userPurchase.map((el)=>{
               return(
                 <div className='my-purchase' key={el._id} style={{backgroundColor:userProfileColor}}>
                   <div className='purchase-invoiceNumber'>invoiceNumber :{(el.invoiceNumber)}</div>
@@ -44,7 +44,7 @@ function Purchase({userProfileData,imageData}) {
                   <div className='purchase-course-img'>{ <img src={`${baseURL}${el.purchasedCourse.courseImage}`} alt="" /> }</div>
                 </div>
               )
-            }):"Sorry, you have no purchases"} </div> 
+            }): <div>"You have no purchases"</div>} </div> 
           </div>
       </section>
   
