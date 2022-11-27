@@ -65,13 +65,19 @@ function setImageHandler(e){
       console.log("error",error)
     }
   }
- 
+  console.log("imageData",imageData)
+  
+  useEffect(()=>{
+    if(image !== null){
+      uploadImage()
+    }
+  },[image])
 
      async function uploadUserImage (){
            
-        if(imageData){
+       localStorage.setItem("imgId",imageData)
+         
           
-          console.log("imageData",imageData)
       const userUploadImage = {
         userImage:imageData
       }
@@ -88,11 +94,11 @@ function setImageHandler(e){
       }catch(error){
         console.log("error",error)
       }
-    }
+    
   
   }
   console.log("isError",isError)
-  uploadUserImage()
+  
  
     
     //Edit function
@@ -182,7 +188,7 @@ function setImageHandler(e){
           telEl.current.value || userProfileData.telephoneLandLine,
         profileColour:
           localStorage.getItem("color") || userProfileData.profileColour,
-            password:passwordEl.current.value  ||  ""  
+           /*   password:passwordEl.current.value  ||  ""  */ 
                 
       };
 
@@ -319,7 +325,7 @@ console.log("newUpdatedData",newUpdatedData)
         <button
           className="user-profile-save-btn"
           style={proStyle}
-          onClick={edit?userDataUpdateHandler : !edit? uploadImage :null}
+          onClick={edit?userDataUpdateHandler : uploadUserImage}
           >
           Save
         </button>
