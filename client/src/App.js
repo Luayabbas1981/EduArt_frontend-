@@ -100,6 +100,7 @@ function App() {
           isAuth={isAuth}
           logout={logout} 
           userName={userName}
+          setUserName={setUserName}
         />
 
         <Routes>

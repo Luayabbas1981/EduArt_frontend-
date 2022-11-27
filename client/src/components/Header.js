@@ -5,7 +5,7 @@ import "./Header.css"
 
 
 
-function Header({isAuth,logout,userName}) {
+function Header({isAuth,logout,userName,setUserName}) {
 
   const [showUserPro,setShowUserPro] = useState(false)
   const navigate = useNavigate()
@@ -17,7 +17,10 @@ function Header({isAuth,logout,userName}) {
   }
   useEffect(()=>{
 
-    if (!isAuth)  {document.querySelector("#user-profile-list").setAttribute("class","hide-user-profile-list")}
+    if (!isAuth) {
+      setUserName("")
+      {document.querySelector("#user-profile-list").setAttribute("class","hide-user-profile-list")}
+    }
      setShowUserPro(false) 
   },[isAuth])
   
