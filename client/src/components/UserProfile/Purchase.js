@@ -4,7 +4,7 @@ import baseURL from "../../util/constants";
 import "./UserProfile.css";
 
 
-function Purchase({userProfileData,userImg}) {
+function Purchase({userProfileData,imageData}) {
 
   
     const [userPurchase,setUserPurchase]=useState([])
@@ -27,7 +27,7 @@ function Purchase({userProfileData,userImg}) {
       <div className="user-photo">{localStorage.getItem("imgId") ?
         <Image className="user-upload-image"
         cloudName= "dqukw0qgs"
-        publicId = { userImg || localStorage.getItem("imgId") 
+        publicId = { imageData || localStorage.getItem("imgId") 
         }
         />
         :<i className="fa-solid fa-user" style={{color:userProfileColor}}></i>

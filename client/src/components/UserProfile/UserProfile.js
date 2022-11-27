@@ -10,6 +10,8 @@ function UserProfile({
   setError,
   error,
   userDateOfBirth,
+  setUserDateOfBirth,
+  setUserName,
   gender,
 }) {
   
@@ -20,9 +22,9 @@ function UserProfile({
   const [newUpdatedData,setNewUpdatedData] = useState({})
   const [isError, setIsError] = useState(false);
   const [proColor, setProColor] = useState("");
-  const [userImg,setUserImg] = useState("")
+  /* const [userImg,setUserImg] = useState("") */
   const [image,setImage]=useState(null)
-  const [imageData,setImageData]=useState({})
+  const [imageData,setImageData]=useState("")
   const [showPassword, setShowPassword] = useState(false);
  
 
@@ -42,8 +44,9 @@ function setImageHandler(e){
   document.querySelector(".user-profile-save-btn").setAttribute("id","shake-btn")
   
 }
+
  async function uploadImage (){
-  setImage(null)
+ 
   document.querySelector(".user-profile-save-btn").removeAttribute("id","shake-btn")
     const formData = new FormData()
     formData.append("file",image)
@@ -52,19 +55,22 @@ function setImageHandler(e){
     try{
 
    const res = await axios.post("https://api.cloudinary.com/v1_1/dqukw0qgs/upload",formData)
-   const data = await res.data
-       setImageData(data)
+   const data = await res.data.public_id 
+       setImageData(data )
      
     }catch(error){
       console.log("error",error)
     }
   }
+ 
 
-  async function uploadUserImage (){
-    
-
+     async function uploadUserImage (){
+           
+        if(imageData){
+          
+          console.log("imageData",imageData)
       const userUploadImage = {
-        userImage:imageData.public_id 
+        userImage:imageData
       }
      
       try{
@@ -72,20 +78,20 @@ function setImageHandler(e){
           `http://localhost:4000/user/${localStorage.getItem("userId")}`,
           userUploadImage
         );
+        console.log("sendNewImage",sendNewImage)
         localStorage.setItem("imgId",sendNewImage.data.userImg)
+        setImageData("")
         
       }catch(error){
-        console.log(error)
+        console.log("error",error)
       }
-    
+    }
+  
   }
-  
-
-  useEffect(()=>{
-    uploadUserImage()
-   setUserImg(imageData.public_id || localStorage.getItem("imgId")) 
-  },[imageData])
-  
+  console.log("isError",isError)
+  uploadUserImage()
+ 
+    
   function editHandler() {
     document
       .querySelector(".user-edit-btn")
@@ -159,7 +165,7 @@ function setImageHandler(e){
           telEl.current.value || userProfileData.telephoneLandLine,
         profileColour:
           localStorage.getItem("color") || userProfileData.profileColour,
-          password:passwordEl.current.value  ||  userProfileData.password
+           /* password:passwordEl.current.value  ||  ""  */
       };
 
       try {
@@ -169,6 +175,12 @@ function setImageHandler(e){
           updatedUserData
         );
         setNewUpdatedData(newUserData.data)
+        if(newUserData.data.dateOfBirth){
+          setUserDateOfBirth((newUserData.data.dateOfBirth).slice(0,10))
+        }
+        if(newUserData.data.userName){
+          setUserName(newUserData.data.userName)
+        }
         setProfileLoading(false);
           setEdit(false)
       } catch (error) {
@@ -215,7 +227,7 @@ console.log("newUpdatedData",newUpdatedData)
         <div className="user-photo">{image !== null?  <img className="user-upload-image" src={URL.createObjectURL(image)} alt="" /> : localStorage.getItem("imgId") ?
         <Image className="user-upload-image"
         cloudName= "dqukw0qgs"
-        publicId = { userImg || localStorage.getItem("imgId") 
+        publicId = { imageData || localStorage.getItem("imgId") 
       }
       />
         :<i className="fa-solid fa-user" style={proStyle}></i>
@@ -364,7 +376,7 @@ console.log("newUpdatedData",newUpdatedData)
         )}
       </section>:""}
 
-      {purchase? <Purchase userProfileData={userProfileData} userImg={userImg}/>:""}
+      {purchase? <Purchase userProfileData={userProfileData} imageData={imageData}/>:""}
       {isLoading || profileLoading ? (
         <div className="profile-loading">loading...</div>
       ) : (
