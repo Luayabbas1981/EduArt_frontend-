@@ -27,6 +27,7 @@ function UserProfile({
   const [imageData,setImageData]=useState("")
   const [showPassword, setShowPassword] = useState(false);
  
+// Profile section functions
 
   function myProfileHandler (){
     setMyProfile(true)
@@ -37,6 +38,8 @@ function purchaseHandler(){
   setMyProfile(false)
   setPurchase(true)
 }
+
+//Image functions 
 
 function setImageHandler(e){
   e.preventDefault()
@@ -92,6 +95,8 @@ function setImageHandler(e){
   uploadUserImage()
  
     
+    //Edit function
+
   function editHandler() {
     document
       .querySelector(".user-edit-btn")
@@ -104,6 +109,8 @@ function setImageHandler(e){
     if(edit) document.querySelector("#user").focus();
    
   });
+
+  // set user color functions
 
   const userProfileColor = localStorage.getItem("color");
   useEffect(() => {
@@ -131,9 +138,13 @@ function setImageHandler(e){
         .setAttribute("id", "edit-btn-id");
     }
   }
+
+  // show password function
   function passwordHandler() {
     if (passwordEl.current.value) setShowPassword(!showPassword);
   }
+
+  // button notice  function 
   function noticeHandler() {
     if (!edit) {
       document
@@ -141,6 +152,9 @@ function setImageHandler(e){
         .setAttribute("id", "edit-btn-id");
     }
   }
+
+  // color user inputs variables
+
   const proStyle = { color: proColor };
   const proBStyle = { backgroundColor: proColor };
   const userNameEl= useRef(null)
@@ -149,6 +163,9 @@ function setImageHandler(e){
   const originEl = useRef(null);
   const telEl = useRef(null);
   const passwordEl = useRef(null)
+
+  
+  // user data update function
 
   async function userDataUpdateHandler(e) {
     if (edit) {
@@ -166,6 +183,7 @@ function setImageHandler(e){
         profileColour:
           localStorage.getItem("color") || userProfileData.profileColour,
            /* password:passwordEl.current.value  ||  ""  */
+                
       };
 
       try {
