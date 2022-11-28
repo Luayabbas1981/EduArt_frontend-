@@ -89,7 +89,7 @@ function Register() {
      <input  className='reg-input' ref={passwordEl} type={showPassword? "text":"password"}  placeholder='Password' required/>
      <div className='reg-show-password' onClick={passwordHandler}>{showPassword? <span><i className="fa-solid fa-eye-slash"></i></span>:<span><i className="fa-solid fa-eye"></i></span>}</div>
      </div>
-     <button id='register-btn' onClick={regInputs.length? submitHandler:null}>Register</button>
+     <button id='register-btn' onClick={ regInputs.length !== 0? submitHandler : null}>Register</button>
      {isRegistered? <> <div > Hello <span style={{color:"darkorange",fontStyle:"italic"}}>{user}</span> you were successfully registered</div> <div>Your will be automatically directed to <span style={{color:"darkorange",fontStyle:"italic"}}>login</span> page</div></>:""}
      {isError? <div style={{color:"red"}}>Sorry.. something went wrong. please try again</div>:""}
     </form>

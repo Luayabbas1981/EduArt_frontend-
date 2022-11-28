@@ -84,7 +84,7 @@ function setImageHandler(e){
      
       try{
        const sendNewImage =   await axios.patch(
-          `http://localhost:4000/user/${localStorage.getItem("userId")}`,
+          `http://localhost:4000/user/updateimage/${localStorage.getItem("userId")}`,
           userUploadImage
         );
         console.log("sendNewImage",sendNewImage)
@@ -188,7 +188,7 @@ function setImageHandler(e){
           telEl.current.value || userProfileData.telephoneLandLine,
         profileColour:
           localStorage.getItem("color") || userProfileData.profileColour,
-           /*   password:passwordEl.current.value  ||  ""  */ 
+              password:passwordEl.current.value  || userProfileData.password
                 
       };
 
