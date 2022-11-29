@@ -13,6 +13,7 @@ function UserProfile({
   setUserDateOfBirth,
   setUserName,
   gender,
+  setGender
 }) {
   
   const [myProfile,setMyProfile]=useState(true)
@@ -26,6 +27,7 @@ function UserProfile({
   const [image,setImage]=useState(null)
   const [imageData,setImageData]=useState("")
   const [showPassword, setShowPassword] = useState(false);
+  const [shakeBtn,setShakeBtn] = useState(false)
  
 // Profile section functions
 
@@ -44,13 +46,13 @@ function purchaseHandler(){
 function setImageHandler(e){
   e.preventDefault()
   setImage(e.target.files[0] || null)
-  document.querySelector(".user-profile-save-btn").setAttribute("id","shake-btn")
-  
+ setShakeBtn(true)
+ 
 }
 
  async function uploadImage (){
  
-  document.querySelector(".user-profile-save-btn").removeAttribute("id","shake-btn")
+    
     const formData = new FormData()
     formData.append("file",image)
     formData.append("upload_preset","eduart")
@@ -59,7 +61,10 @@ function setImageHandler(e){
 
    const res = await axios.post("https://api.cloudinary.com/v1_1/dqukw0qgs/upload",formData)
    const data = await res.data.public_id 
-       setImageData(data )
+      
+
+   setImageData( data )
+        
      
     }catch(error){
       console.log("error",error)
@@ -75,8 +80,8 @@ function setImageHandler(e){
 
      async function uploadUserImage (){
            
-       localStorage.setItem("imgId",imageData)
-         
+       localStorage.setItem("imgId",imageData || userProfileData.userImage)
+       setShakeBtn(false)
           
       const userUploadImage = {
         userImage:imageData
@@ -88,7 +93,7 @@ function setImageHandler(e){
           userUploadImage
         );
         console.log("sendNewImage",sendNewImage)
-        localStorage.setItem("imgId",sendNewImage.data.userImg)
+      
         setImageData("")
         
       }catch(error){
@@ -205,10 +210,13 @@ function setImageHandler(e){
         if(newUserData.data.userName){
           setUserName(newUserData.data.userName)
         }
+        if(newUserData.data.gender){
+          setGender(newUserData.data.gender)
+        }
         setProfileLoading(false);
           setEdit(false)
       } catch (error) {
-        console.log(error)
+        console.log("Error",error)
         setProfileLoading(false);
         setIsError(true);
       }
@@ -216,7 +224,7 @@ function setImageHandler(e){
   }
 console.log("newUpdatedData",newUpdatedData)
   
-
+console.log("gender",gender)
   return (
     <div
       className={
@@ -251,7 +259,7 @@ console.log("newUpdatedData",newUpdatedData)
         <div className="user-photo">{image !== null?  <img className="user-upload-image" src={URL.createObjectURL(image)} alt="" /> : localStorage.getItem("imgId") ?
         <Image className="user-upload-image"
         cloudName= "dqukw0qgs"
-        publicId = { imageData || localStorage.getItem("imgId") 
+        publicId = { localStorage.getItem("imgId") 
       }
       />
         :<i className="fa-solid fa-user" style={proStyle}></i>
@@ -266,11 +274,11 @@ console.log("newUpdatedData",newUpdatedData)
         </div>
       
         <div className="user-gender-icon font">
-          {gender === "male" ? (
+          {gender === "male" ? 
             <i className="fa-solid fa-mars gender-icon" style={proStyle}></i>
-            ) : (
+             : 
               <i className="fa-solid fa-venus gender-icon" style={proStyle}></i>
-              )}
+              }
         </div>
         <div className="user-birthday-icon font">
           <i
@@ -323,7 +331,7 @@ console.log("newUpdatedData",newUpdatedData)
           onClick={proStyleHandler}
           ></div>
         <button
-          className="user-profile-save-btn"
+          className="user-profile-save-btn" id={shakeBtn? "shake-save-btn":""}
           style={proStyle}
           onClick={edit?userDataUpdateHandler : uploadUserImage}
           >
@@ -395,7 +403,7 @@ console.log("newUpdatedData",newUpdatedData)
                 <p className="not-entered">not entered</p>
               )}
             </div>{" "}
-            <div className="user-password font"><p>...........</p></div>
+            <div className="user-password font"><p>#####</p></div>
           </>
         )}
       </section>:""}

@@ -222,15 +222,9 @@
   position: relative;
   grid-column: 10/15;
   grid-row: 12/13;
+  font-size: 25px;
   background-color: var(--b-c);
 }
-
-.user-password p {
-  position: absolute;
-  top: -170%;
-  font-size: 50px;
-}
-
 
 .cherry {
   cursor: pointer;
@@ -313,7 +307,7 @@
   animation: scale 0.7s 6 alternate linear;
   -webkit-animation: scale 0.7s 6 alternate linear;
 }
-#shake-btn {
+#shake-save-btn {
   animation: shake-btn 1.8s 4 alternate;
   -webkit-animation: shake-btn 1.8s 4 alternate;
 }
