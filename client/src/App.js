@@ -92,7 +92,7 @@ function App() {
       setIsAuth(true);
     }
   }, [isAuth]);
-
+console.log("userProfileData",userProfileData)
   return (
     <MyContext.Provider value={{ selectedCourse, setSelectedCourse }}>
       <Router>
