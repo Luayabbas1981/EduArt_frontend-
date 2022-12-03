@@ -6,13 +6,8 @@ import "./UserProfile.css";
 
 
 function Purchases({userProfileData,imageData}) {
-
-  
     const [userPurchase,setUserPurchase]=useState([])
-    
-   
     const userProfileColor = localStorage.getItem("color");
-    
     const navigate = useNavigate();
    
       useEffect(()=>{
@@ -20,12 +15,8 @@ function Purchases({userProfileData,imageData}) {
         setUserPurchase(userProfileData.myPurchases)  
       },[userProfileData])
      
-    
- 
-
   return (
- 
- 
+
       <section className="personal-data">
       <div id="user-bc" style={{backgroundColor:userProfileColor}}></div>
       <div className="user-photo">{localStorage.getItem("imgId") ?

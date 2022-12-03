@@ -2,13 +2,11 @@ import React,{useState,useEffect} from 'react'
 import { useParams } from "react-router-dom";
 import axios from "axios"
 import { jsPDF } from "jspdf";
-import "jspdf-autotable"
 
-function Pruchase() {
+function Purchase() {
     
-    const [purchase,setPurchase]= useState([])
+     const [purchase,setPurchase]= useState([])
      const [purchaseData,setPurchaseData] = useState( []) 
-   
      const {id} = useParams();      
      const purchaseId = id.slice(1)
   
@@ -23,8 +21,6 @@ function Pruchase() {
     getPurchaseData()
   },[])
       
-   console.log(purchase)
-
       function download(){
     const pdfDiv =   document.querySelector(".pdf-purchase-container")
       const doc = new jsPDF('p', 'px', [620, 450]);
@@ -34,15 +30,10 @@ function Pruchase() {
           
           doc.save(`Purchase invoice number ${purchaseData.invoiceNumber}.pdf`);
         }
-      });
-      
-    }  
-   
-             
+      }); }  
+            
   return (
-    
     <>
- 
     <div className='pdf-purchase-container'>
     <img className='pdf-purchase-logo' src={require("../../Images/logo.png")} alt="" />
        
@@ -70,19 +61,15 @@ function Pruchase() {
       </div>
     </div>
     <div className="accounting">
-
     <div>Accounting</div>
     <div className='sign-img'><img src={require("../../Images/signature2.png")} alt="" /></div>
     </div>
       </div>
       <div className='pdf-purchase-btn'>
-
-    <button   onClick={download} >Download</button>
+      <button   onClick={download} >Download</button>
       </div>
-   
     </>
-  
   )
 }
 
-export default Pruchase
+export default Purchase
