@@ -32,7 +32,7 @@ function Purchases({userProfileData,imageData}) {
             <div className="purchase-container">
                {userPurchase.length !== 0? userPurchase.map((el)=>{
               return(
-                <div className='my-purchase' onClick={()=>navigate(`/purchaseid/:${el._id}`)} key={el._id} style={{backgroundColor:userProfileColor}}>
+                <div className='my-purchase' onClick={()=>navigate(`/purchase/:${el._id}`)} key={el._id} style={{backgroundColor:userProfileColor}}>
                   <div className='purchase-invoiceNumber'>invoiceNumber: {(el.invoiceNumber)}</div>
                   <div className='purchase-course-name'>Course name: {el.purchasedCourse.courseName}</div>
                   <div className='course-dateOfStart'>Course start: {(el.purchasedCourse.dateOfStart).slice(0,10)}</div>
