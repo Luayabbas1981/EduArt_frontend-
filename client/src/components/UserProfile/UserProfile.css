@@ -343,18 +343,23 @@
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
+  cursor: pointer;
 }
 .my-purchase {
   width: 95%;
   height: 250px;
   display: grid;
   grid-template-columns: repeat(3, calc(100% / 3));
-  grid-template-rows: repeat(4, calc(100% / 4));
+  grid-template-rows: repeat(5, calc(100% / 5));
   padding: 0.7rem;
   color: white;
   border-radius: 1rem;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
+}
+.course-dateOfStart{
+  grid-column: 1/3;
+  grid-row: 3;
 }
 .purchase-invoiceNumber {
   grid-column: 1/3;
@@ -363,6 +368,9 @@
 .purchase-course-name {
   grid-column: 1/3;
   grid-row: 1;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .purchase-course-img {
   grid-column: 3;
@@ -374,4 +382,58 @@
   border-radius: 1rem;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
+}
+
+/* PurchaseId CSS */
+
+.pdf-purchase-container{
+  width: 400px;
+  height: 555px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  font-family: "Jura", sans-serif;
+}
+.pdf-purchase-logo{
+  width: 120px;
+  height: 70px;
+}
+.pdf-purchase{
+  margin-top: 10%;
+  display: flex;
+  justify-content: space-around;
+  
+}
+.pdf{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20%;
+}
+.pdf-purchase-info1 >div , .pdf-purchase-info2 >div{
+ margin-bottom: 25px;
+}
+.accounting{
+  margin-left: 60%;
+  text-align: center;
+
+}
+.sign-img >img{
+  width: 100%;
+  height: 100%;
+ 
+}
+.pdf-purchase-btn{
+  display: flex;
+  justify-content: center;
+}
+.pdf-purchase-btn > button{
+  margin-top: 30px;
+  width: 100px;
+  font-family: "Jura", sans-serif;
+  border-radius: 1rem;
+  background-color:#eee;
+  color: black;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+ 
 }

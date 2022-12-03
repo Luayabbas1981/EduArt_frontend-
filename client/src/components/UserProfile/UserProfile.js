@@ -241,7 +241,7 @@ console.log("gender",gender)
             className="fa-solid fa-bag-shopping"
             style={{ color: "coral" }}
           ></i>
-          <div>Purchase</div>
+          <div>Purchases</div>
         </div>
         <div className="user-certificate user-pro-color">
           <i
