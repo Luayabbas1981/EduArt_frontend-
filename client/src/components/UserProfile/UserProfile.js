@@ -23,7 +23,6 @@ function UserProfile({
   const [newUpdatedData,setNewUpdatedData] = useState({})
   const [isError, setIsError] = useState(false);
   const [proColor, setProColor] = useState("");
-  /* const [userImg,setUserImg] = useState("") */
   const [image,setImage]=useState(null)
   const [imageData,setImageData]=useState("")
   const [showPassword, setShowPassword] = useState(false);
