@@ -42,9 +42,9 @@ function Purchase() {
         <div>Purchase invoice number:</div>
     <div>Course name: </div>
     <div>Course type: </div>
-    <div>Course date of start: </div>
+    <div>Course start-ed on: </div>
     <div>Course duration: </div>
-    <div>Course inshort: </div>
+    <div>Course in short: </div>
     <div>Course price: </div>
     <div>Status:</div>
       </div>

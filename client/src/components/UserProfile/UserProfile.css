@@ -327,7 +327,7 @@
   }
 }
 
-/* Purchase CSS */
+/* Purchases CSS */
 
 .purchases-container {
   height: 100%;
@@ -384,7 +384,7 @@
   -moz-border-radius: 1rem;
 }
 
-/* PurchaseId CSS */
+/* Purchase CSS */
 
 .pdf-purchase-container{
   width: 400px;
@@ -395,7 +395,7 @@
   font-family: "Jura", sans-serif;
 }
 .pdf-purchase-logo{
-  width: 120px;
+  width: 160px;
   height: 70px;
 }
 .pdf-purchase{
@@ -410,9 +410,10 @@
   row-gap: 20%;
 }
 .pdf-purchase-info1 >div , .pdf-purchase-info2 >div{
- margin-bottom: 25px;
+ margin-bottom: 20px;
 }
 .accounting{
+  margin-top: 8%;
   margin-left: 60%;
   text-align: center;
 
