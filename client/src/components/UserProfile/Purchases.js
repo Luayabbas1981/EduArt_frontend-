@@ -5,15 +5,11 @@ import baseURL from "../../util/constants";
 import "./UserProfile.css";
 
 
-function Purchases({userProfileData,imageData}) {
-    const [userPurchase,setUserPurchase]=useState([])
+function Purchases({imageData,userPurchases}) {
     const userProfileColor = localStorage.getItem("color");
     const navigate = useNavigate();
    
-      useEffect(()=>{
-
-        setUserPurchase(userProfileData.myPurchases)  
-      },[userProfileData])
+  
      
   return (
 
@@ -30,7 +26,7 @@ function Purchases({userProfileData,imageData}) {
         </div>
           <div className="purchases-container">
             <div className="purchase-container">
-               {userPurchase.length !== 0? userPurchase.map((el)=>{
+               {userPurchases.length !== 0? userPurchases.map((el)=>{
               return(
                 <div className='my-purchase' onClick={()=>navigate(`/purchase/:${el._id}`)} key={el._id} style={{backgroundColor:userProfileColor}}>
                   <div className='purchase-invoiceNumber'>invoiceNumber: {(el.invoiceNumber)}</div>

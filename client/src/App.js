@@ -13,6 +13,7 @@ import Register from "./components/Register/Register";
 import AboutUs from "./components/AboutUs/AboutUs";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Purchase from "./components/UserProfile/Purchase"
+ import Certificates from "./components/UserProfile/Certificates"; 
 import axios from "axios";
 
 
@@ -24,6 +25,7 @@ function App() {
   const [userProfileData,setUserProfileData] = useState({})
   const [isLoading, setIsLoading] = useState(false); 
   const [error, setError] = useState(false); 
+  const [userPurchases,setUserPurchases]=useState([])
   const [userName,setUserName]= useState("")
   const [gender,setGender]= useState("")
   const [userDateOfBirth,setUserDateOfBirth] = useState("")
@@ -59,6 +61,7 @@ function App() {
             setIsLoading(true)
           const userDetails = await axios.get(`http://localhost:4000/user/${localStorage.getItem("userId")}`)
           setUserProfileData(userDetails.data)
+          setUserPurchases(userDetails.data.myPurchases)
           console.log("userProfileData",userProfileData)
           setIsLoading(false)
           localStorage.setItem("color",userDetails.data.profileColour)
@@ -130,6 +133,7 @@ console.log("userProfileData",userProfileData)
          <Route path={"/register"} element={<Register />} />
          <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isLoading={isLoading} error={error} setError={setError} setUserName={setUserName} userDateOfBirth={userDateOfBirth} setUserDateOfBirth={setUserDateOfBirth} gender={gender} setGender={setGender}/>} />
          <Route path={"/purchase/:id"} element= {<Purchase />}/>
+          <Route path={"/certificates"} element= {<Certificates userProfileData={userProfileData} userPurchases={userPurchases} />}/> 
 
         </Routes>
       </Router>

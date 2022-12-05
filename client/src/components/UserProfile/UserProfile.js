@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {Image} from "cloudinary-react"
 import axios from "axios";
 import Purchases from "./Purchases";
 import "./UserProfile.css";
+
 
 function UserProfile({
   userProfileData,
@@ -15,7 +17,7 @@ function UserProfile({
   gender,
   setGender
 }) {
-  
+  const [userPurchases,setUserPurchases]=useState([])
   const [myProfile,setMyProfile]=useState(true)
   const [purchase,setPurchase]=useState(false)
   const [edit, setEdit] = useState(false);
@@ -27,18 +29,30 @@ function UserProfile({
   const [imageData,setImageData]=useState("")
   const [showPassword, setShowPassword] = useState(false);
   const [shakeBtn,setShakeBtn] = useState(false)
- 
+  const navigate = useNavigate()
+
+
+  useEffect(()=>{
+
+    setUserPurchases(userProfileData.myPurchases)  
+  },[userProfileData])
+
+
 // Profile section functions
 
   function myProfileHandler (){
     setMyProfile(true)
     setPurchase(false)
+    
+    
   }
   
 function purchaseHandler(){
   setMyProfile(false)
   setPurchase(true)
+  
 }
+
 
 //Image functions 
 
@@ -242,7 +256,7 @@ console.log("gender",gender)
           ></i>
           <div>Purchases</div>
         </div>
-        <div className="user-certificate user-pro-color">
+        <div className="user-certificate user-pro-color" onClick={()=>navigate("/certificates")} >
           <i
             className="fa-solid fa-graduation-cap"
             style={{ color: "black" }}
@@ -407,12 +421,13 @@ console.log("gender",gender)
         )}
       </section>:""}
 
-      {purchase? <Purchases userProfileData={userProfileData} imageData={imageData}/>:""}
+      {purchase? <Purchases  imageData={imageData} userPurchases={userPurchases}/>:""}
       {isLoading || profileLoading ? (
         <div className="profile-loading">loading...</div>
       ) : (
         ""
       )}
+   
       {error || isError ? (
         <div className="profile-error">
           Sorry.. something went wrong,please try again

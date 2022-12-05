@@ -24,10 +24,9 @@ function Purchase() {
       function download(){
     const pdfDiv =   document.querySelector(".pdf-purchase-container")
       const doc = new jsPDF('p', 'px', [620, 450]);
-     
-      doc.html(pdfDiv, {
-        async callback(doc) { 
-          
+      
+        doc.html(pdfDiv, {
+          async callback(doc) { 
           doc.save(`Purchase invoice number ${purchaseData.invoiceNumber}.pdf`);
         }
       }); }  
@@ -35,8 +34,7 @@ function Purchase() {
   return (
     <>
     <div className='pdf-purchase-container'>
-    <img className='pdf-purchase-logo' src={require("../../Images/logo.png")} alt="" />
-       
+    <img className='pdf-purchase-logo' src={require("../../Images/logo.png")} alt="" /> 
     <div className='pdf-purchase'>
       <div className='pdf-purchase-info1'>
         <div>Purchase invoice number:</div>
