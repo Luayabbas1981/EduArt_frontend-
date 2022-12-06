@@ -470,3 +470,18 @@
   height: 100%;
   background-color: transparent;
 }
+.pdf-purchase-btn{
+  display: flex;
+  justify-content: center;
+}
+.pdf-purchase-btn > button{
+  margin-top: 30px;
+  width: 100px;
+  font-family: "Jura", sans-serif;
+  border-radius: 1rem;
+  background-color:#eee;
+  color: black;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+ 
+}
