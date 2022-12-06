@@ -12,7 +12,6 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import AboutUs from "./components/AboutUs/AboutUs";
 import UserProfile from "./components/UserProfile/UserProfile";
-import Purchase from "./components/UserProfile/Purchase"
  import Certificates from "./components/UserProfile/Certificates"; 
 import axios from "axios";
 
@@ -20,6 +19,7 @@ import axios from "axios";
 export const MyContext = React.createContext(null);
 
 function App() {
+  const [lang,setLang]=useState("EN")
   const [isAuth, setIsAuth] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [userProfileData,setUserProfileData] = useState({})
@@ -132,7 +132,6 @@ console.log("userProfileData",userProfileData)
 
          <Route path={"/register"} element={<Register />} />
          <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isLoading={isLoading} error={error} setError={setError} setUserName={setUserName} userDateOfBirth={userDateOfBirth} setUserDateOfBirth={setUserDateOfBirth} gender={gender} setGender={setGender}/>} />
-         <Route path={"/purchase/:id"} element= {<Purchase />}/>
           <Route path={"/certificates"} element= {<Certificates userProfileData={userProfileData} userPurchases={userPurchases} />}/> 
 
         </Routes>

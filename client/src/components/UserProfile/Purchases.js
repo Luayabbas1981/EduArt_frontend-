@@ -1,13 +1,12 @@
-import React,{useState,useEffect} from 'react'
+
 import {Image} from "cloudinary-react"
-import {useNavigate} from "react-router-dom";
 import baseURL from "../../util/constants";
 import "./UserProfile.css";
 
 
 function Purchases({imageData,userPurchases}) {
     const userProfileColor = localStorage.getItem("color");
-    const navigate = useNavigate();
+    
    
   
      
@@ -28,11 +27,12 @@ function Purchases({imageData,userPurchases}) {
             <div className="purchase-container">
                {userPurchases.length !== 0? userPurchases.map((el)=>{
               return(
-                <div className='my-purchase' onClick={()=>navigate(`/purchase/:${el._id}`)} key={el._id} style={{backgroundColor:userProfileColor}}>
+                <div className='my-purchase' key={el._id} style={{backgroundColor:userProfileColor}}>
                   <div className='purchase-invoiceNumber'>invoiceNumber: {(el.invoiceNumber)}</div>
                   <div className='purchase-course-name'>Course name: {el.purchasedCourse.courseName}</div>
                   <div className='course-dateOfStart'>Course start: {(el.purchasedCourse.dateOfStart).slice(0,10)}</div>
                   <div className="purchase-course-price">Course price: {el.purchasedCourse.coursePrice}€</div>
+                  <a href={`http://localhost:4000/invoices/${el.invoiceNumber}.pdf`} className='pdf-symbol' ><i className="fa-solid fa-file-pdf"></i></a>
                   <div className='purchase-course-img'>{ <img src={`${baseURL}${el.purchasedCourse.courseImage}`} alt="" /> }</div>
                 </div>
               )
