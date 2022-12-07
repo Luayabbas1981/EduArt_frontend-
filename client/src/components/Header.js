@@ -19,7 +19,7 @@ function Header({isAuth,logout,userName,setUserName}) {
 
     if (!isAuth) {
       setUserName("")
-      {document.querySelector("#user-profile-list").setAttribute("class","hide-user-profile-list")}
+      document.querySelector("#user-profile-list").setAttribute("class","hide-user-profile-list")
     }
      setShowUserPro(false) 
   },[isAuth])

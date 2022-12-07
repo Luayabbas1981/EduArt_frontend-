@@ -12,7 +12,8 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import AboutUs from "./components/AboutUs/AboutUs";
 import UserProfile from "./components/UserProfile/UserProfile";
- import Certificates from "./components/UserProfile/Certificates"; 
+import Certificates from "./components/UserProfile/Certificates"; 
+import ShareSite from "./components/ShareSite/ShareSite";
 import axios from "axios";
 
 
@@ -133,7 +134,7 @@ console.log("userProfileData",userProfileData)
          <Route path={"/register"} element={<Register />} />
          <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isLoading={isLoading} error={error} setError={setError} setUserName={setUserName} userDateOfBirth={userDateOfBirth} setUserDateOfBirth={setUserDateOfBirth} gender={gender} setGender={setGender}/>} />
           <Route path={"/certificates"} element= {<Certificates userProfileData={userProfileData} userPurchases={userPurchases} />}/> 
-
+            <Route patch={"/sharesite"}></Route>
         </Routes>
       </Router>
     </MyContext.Provider>
