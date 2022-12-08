@@ -134,7 +134,7 @@ console.log("userProfileData",userProfileData)
          <Route path={"/register"} element={<Register />} />
          <Route path={"/userprofile"} element={<UserProfile userProfileData={userProfileData} isLoading={isLoading} error={error} setError={setError} setUserName={setUserName} userDateOfBirth={userDateOfBirth} setUserDateOfBirth={setUserDateOfBirth} gender={gender} setGender={setGender}/>} />
           <Route path={"/certificates"} element= {<Certificates userProfileData={userProfileData} userPurchases={userPurchases} />}/> 
-            <Route patch={"/sharesite"}></Route>
+          <Route path={"/sharesite"} element={<ShareSite />} />
         </Routes>
       </Router>
     </MyContext.Provider>
