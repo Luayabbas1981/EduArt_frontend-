@@ -1,15 +1,16 @@
 
 import {Image} from "cloudinary-react"
+import { useEffect, useState } from "react";
 import baseURL from "../../util/constants";
 import "./UserProfile.css";
 
 
 function Purchases({imageData,userPurchases}) {
-    const userProfileColor = localStorage.getItem("color");
-    
-   
+ 
+  const userProfileColor = localStorage.getItem("color");
   
-     
+ 
+console.log("renderdPdf",userPurchases)
   return (
 
       <section className="personal-data">
@@ -32,7 +33,7 @@ function Purchases({imageData,userPurchases}) {
                   <div className='purchase-course-name'>Course name: {el.purchasedCourse.courseName}</div>
                   <div className='course-dateOfStart'>Course start: {(el.purchasedCourse.dateOfStart).slice(0,10)}</div>
                   <div className="purchase-course-price">Course price: {el.purchasedCourse.coursePrice}€</div>
-                  <a href={`http://localhost:4000/invoices/${el.invoiceNumber}.pdf`} className='pdf-symbol' ><i className="fa-solid fa-file-pdf"></i></a>
+                  <a href={`http://localhost:4000/${(el.renderedPDF).slice(9)}`} className='pdf-symbol' ><i className="fa-solid fa-file-pdf"></i></a>
                   <div className='purchase-course-img'>{ <img src={`${baseURL}${el.purchasedCourse.courseImage}`} alt="" /> }</div>
                 </div>
               )

@@ -60,7 +60,7 @@ useEffect(()=>{
       <i className="fa-solid fa-user user-pro-color" id="user-profile" onClick={isAuth? shwoUserProHandler:hideUserProHandler}>
         <ul id="user-profile-list" className={showUserPro?"user-pro-ul":"hide-userPro-ul"}>
           
-          <li className="user-pro-color" onClick={()=>navigate("/sharesite")}>My class</li>
+          <li className="user-pro-color" onClick={()=>navigate("/sharesite")}>Share site</li>
           <li className="user-pro-color">Learning desk</li>
           <li className="user-pro-color" onClick={()=>navigate("/userprofile")}>My profile</li> 
         </ul>
