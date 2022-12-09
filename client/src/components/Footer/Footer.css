@@ -1,4 +1,4 @@
-footer {
+.home-footer {
     display: flex;
     justify-content: space-around;
     user-select: none;

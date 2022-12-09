@@ -13,10 +13,7 @@ function Footer() {
   document.querySelector(".message").focus()
  })
  
-  useEffect(()=>{
-    document.querySelector(".message").focus()
  
-  })
   function textHandler(){
     if(messageText.value){
       if(response) setResponse("")
@@ -41,7 +38,7 @@ function Footer() {
   
 
   return (
-    <footer>
+    <footer className='home-footer'>
       <div className="footer-infos">
 
        <div className="star"><i className="fa-solid fa-star"></i> <span> 4.8 rating</span></div>

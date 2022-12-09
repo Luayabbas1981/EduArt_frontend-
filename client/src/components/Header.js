@@ -88,6 +88,12 @@ function Header({
             >
               My profile
             </li>
+            <li
+              className="user-pro-color"
+              onClick={() => navigate("/shareplatform")}
+            >
+              Share site
+            </li>
           </ul>
         </i>
         {isAuth && isAdmin && (

@@ -16,6 +16,7 @@ import Register from "./components/Register/Register";
 import AboutUs from "./components/AboutUs/AboutUs";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Certificates from "./components/UserProfile/Certificates"; 
+import ShareSite from "./components/ShareSite/ShareSite"
 import LearningDesk from "./components/LearningDesk/LearningDesk";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 
@@ -201,6 +202,7 @@ function App() {
               }
             />
              <Route path={"/certificates"} element= {<Certificates userProfileData={userProfileData} userPurchases={userPurchases} />}/> 
+             <Route path={"/shareplatform"} element= {<ShareSite />}/> 
           </Routes>
         </Router>
       </MyContext.Provider>
