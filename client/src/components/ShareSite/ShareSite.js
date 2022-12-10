@@ -7,12 +7,13 @@ import "./ShareSite.css"
 function ShareSite() {
 const [allMessages,setAllMessages]=useState([])
 const [input,setInput] = useState("")
+const [messageSended,setMessageSended]= useState(false)
 const [emoji,setEmoji]=useState("")
 const [messageTools,setMessageTools]=useState(true)
 const [emojiToll,setEmojiTool]=useState(false)
 const [textToll,setTextTool]=useState(false)
 const [size,setSize]=useState("")
-const [color,setColor] = useState("")
+const [color,setColor] = useState("black")
 const [scale,setScale]= useState(false)
 const [code,setCode]= useState(false)
 
@@ -59,14 +60,14 @@ function codeHandler(){
   if(scale) setCode(!code)
 }
   
-  // Get all messages function
   useEffect(()=>{
     async function getSharedMessages (){
       const allMessages = await axios.get(`http://localhost:4000/shareplattform`)
-      setAllMessages(allMessages.data)
+      setAllMessages((allMessages.data).reverse())
     }
     getSharedMessages ()
-  },[])
+  },[messageSended])
+
   console.log("allMessages",allMessages)
 
   // Send message function
@@ -78,18 +79,28 @@ async function sendMessageHandler (e){
     message:input
   }
   setInput("")
+  setMessageSended(!messageSended)
   try {
     await axios.post(`http://localhost:4000/shareplattform`,message)
   } catch (error) {
     console.log(error)
   }} 
 }
-  
+  console.log("messageSended",messageSended)
   return (
     <div className='chat-site'>
       <main className="share-site-main">
-      <section className='section-one'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur vel repellat laboriosam. Ab laborum, illum ad iusto facilis quaerat sit praesentium architecto aliquid, facilis aut vitae odio sequi nemo accusantium ea repellendus quibusdam autem deleniti error unde?</section>
-      <section className='section-two'>orem ipsum dolor sit amet consectetur adip</section>
+      <section className='section-one'>
+        {allMessages.map((ms)=>{
+          return(<div key={ms._id} className="share-site-sended-message-container">
+
+            <div>{ms.message}</div>
+          </div>
+          
+          )
+        })}
+      </section>
+      <section className='section-two'></section>
       <section className='section-three'></section>
       <section className='section-four'></section>
       </main>
