@@ -15,31 +15,24 @@ const [size,setSize]=useState("")
 const [color,setColor] = useState("")
 const [scale,setScale]= useState(false)
 const [code,setCode]= useState(false)
+
+// Input functions
 useEffect(()=>{
   document.querySelector(".share-site-textarea").focus()
 })
 
-function minimizeHandler(){
-  setScale(!scale)
-}
-console.log("code",code)
-function codeHandler(){
-  if(scale) setCode(!code)
-}
   function inputHandler(e){
     if(code) setInput(`${<pre><code>{e.target.value}</code></pre>}`)
     setInput( e.target.value)
   }
-  console.log("input",input)
   function emojiHandler(e){
-    console.log(e)
     const emoji = document.querySelector(`.${e.target.className}`).innerText
     setEmoji(emoji
       )
     setInput(input + emoji)
   }
-console.log("emoji",emoji)
 
+// Message tools functions
 function emojiToolHandler(){
   setMessageTools(false)
   setTextTool(false)
@@ -49,26 +42,24 @@ function textToolHandler(){
   setMessageTools(false)
   setEmojiTool(false)
   setTextTool(true)
-  
 }
-
-
-  function colorHandler(e){
+function colorHandler(e){
     setColor(e.target.value)
   }
-
-console.log(color)
-
 function sizeHandler(e){
   setSize(e.target.id)
-
 }
-console.log(size)
 function goBackHandler(){
   setMessageTools(true)
 }
+function minimizeHandler(){
+  setScale(!scale)
+}
+function codeHandler(){
+  if(scale) setCode(!code)
+}
   
-  console.log("input",input)
+  // Get all messages function
   useEffect(()=>{
     async function getSharedMessages (){
       const allMessages = await axios.get(`http://localhost:4000/shareplattform`)
@@ -78,6 +69,7 @@ function goBackHandler(){
   },[])
   console.log("allMessages",allMessages)
 
+  // Send message function
 async function sendMessageHandler (e){
    if( input ){ 
   e.preventDefault()
