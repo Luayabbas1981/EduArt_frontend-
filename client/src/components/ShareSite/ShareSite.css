@@ -4,7 +4,7 @@
 .share-site-main {
     height: 89%;
     overflow: auto;
-    background-color: #eee;
+    background-color: #f8f8f8;
 }
 
 .share-site-main > section{
@@ -20,7 +20,7 @@
    
 }
 .share-site-footer{
-    background-color: #eee; 
+    background-color: #f8f8f8; 
 }
 .share-site-footer-container {
     width: 100%;
@@ -28,10 +28,11 @@
     display: grid;
     grid-template-columns: repeat(20, calc(100% / 20));
     grid-template-rows: repeat(10, calc(100% / 10));
-    border: 3px solid #acaaaa;
+    border: 2px solid #036b0c;
     border-radius: 1.6rem;
     -webkit-border-radius: 1.6rem;
     -moz-border-radius: 1.6rem;
+   
    
    
 }
@@ -56,7 +57,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #eee;
+    background-color: #f3f2f2;
     font-size: xx-large;
     cursor: pointer;
     border-top-right-radius: 1rem;
@@ -68,7 +69,7 @@
 }
 .share-site-send-message > i:hover{
     scale: 1.2;
-    color: #3787d6;
+  
 }
 .message-tool-container {
     grid-column: 1/5;
@@ -76,7 +77,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #eee;
+    background-color: #f3f2f2;
     font-size: xx-large;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
@@ -91,7 +92,7 @@
 }
 .message-tool-container > div>i:hover {
     scale: 1.2;
-    color: tomato;
+   
 }
 @keyframes show {
     to {
@@ -112,6 +113,7 @@
     background-color: rgb(244, 241, 241);
     font-size: xx-large;
 }
+
 .emoji-container,
 .text-container {
     grid-column: 1/7;

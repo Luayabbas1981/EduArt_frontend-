@@ -14,7 +14,7 @@ const [textToll,setTextTool]=useState(false)
 const [size,setSize]=useState("")
 const [color,setColor] = useState("")
 const [scale,setScale]= useState(false)
-
+const [code,setCode]= useState(false)
 useEffect(()=>{
   document.querySelector(".share-site-textarea").focus()
 })
@@ -22,11 +22,15 @@ useEffect(()=>{
 function minimizeHandler(){
   setScale(!scale)
 }
-
+console.log("code",code)
+function codeHandler(){
+  if(scale) setCode(!code)
+}
   function inputHandler(e){
+    if(code) setInput(`${<pre><code>{e.target.value}</code></pre>}`)
     setInput( e.target.value)
-   
   }
+  console.log("input",input)
   function emojiHandler(e){
     console.log(e)
     const emoji = document.querySelector(`.${e.target.className}`).innerText
@@ -100,19 +104,21 @@ async function sendMessageHandler (e){
         <footer className="share-site-footer">
           <div className= "share-site-footer-container"  style={{scale:`${scale? ".8":".4"}`}}> 
             <div className="textarea-container" style={{scale:`${scale? "1":"0"}`}}>
-            <textarea className="share-site-textarea" onChange={inputHandler} value={input} style={{fontSize:size,color:color }}/>
+            <textarea className="share-site-textarea" onChange={inputHandler} value= {input} style={{fontSize:size,color:color }}/>
             </div>
-            <div className="share-site-send-message" onClick={sendMessageHandler}>
-            <i className="fa-solid fa-paper-plane"></i>
+            <div className="share-site-send-message" onClick={sendMessageHandler} >
+            <i className="fa-solid fa-paper-plane" style={{color:"#3787d6"}}></i>
             </div>
             
             <div className="message-tool-container">
               {messageTools? <>
               
-                <div className="emoji-tool" onClick={scale? emojiToolHandler : null}> <i className="fa-regular fa-face-smile "></i></div> 
+                <div className="emoji-tool" onClick={scale? emojiToolHandler : null}>😀</div> 
                 <input className="color-input" type="color" style={{pointerEvents:`${scale? "auto":"none"}`}} onChange={colorHandler}/>
-                <div className="write-tool" onClick={scale?textToolHandler:null}><i className="fa-solid fa-text-height"></i></div>
-                <div className="minimize" onClick={minimizeHandler}><i className="fa-solid fa-down-left-and-up-right-to-center" style={{fontSize:`${scale? "35px":"65px"}`,color:`${scale? "gray":"tomato"}`}}></i></div>
+                <div className="write-tool" onClick={scale?textToolHandler:null}><i className="fa-solid fa-text-height" style={{color:"#f44336"}}></i></div>
+                <div onClick={codeHandler}><i className="fa-solid fa-code" style={{color:"#673ab7"}}></i></div>
+                <div className="minimize" onClick={minimizeHandler}><i className="fa-solid fa-down-left-and-up-right-to-center" style={{fontSize:`${scale? "35px":"65px"}`,color:"#2196f3"}}></i></div>
+                
               </>:<>
               {emojiToll &&  <>
             <div className="emoji-container">{EmojiArr.map((emoji,i)=>{
@@ -120,13 +126,13 @@ async function sendMessageHandler (e){
                 <div key={i} onClick={emojiHandler } className={emoji} >{emoji}</div>
                 )
               })}</div>
-              <div className="go-back" onClick={goBackHandler}><i className="fa-solid fa-arrow-left"></i></div></>}
+              <div className="go-back" onClick={goBackHandler}><i className="fa-solid fa-arrow-left"  style={{color:"#3787d6"}} ></i></div></>}
               {textToll && <>
                 {TextSizeArr.map((size,i)=>{
                   return(
-                    <div key={i}  onClick={sizeHandler}><i id={size} style={{fontSize:size}} className="fa-solid fa-text-height"></i></div>
+                    <div key={i}  onClick={sizeHandler}><i id={size} style={{fontSize:size,color:"#f44336"}} className="fa-solid fa-text-height"></i></div>
                   )
-                })}  <div className="go-back" onClick={goBackHandler}><i className="fa-solid fa-arrow-left"></i></div>
+                })}  <div className="go-back" onClick={goBackHandler}><i className="fa-solid fa-arrow-left"  style={{color:"#3787d6"}} ></i></div>
               </>}
               </>}
               </div>
@@ -137,3 +143,5 @@ async function sendMessageHandler (e){
 }
 
 export default ShareSite
+
+
