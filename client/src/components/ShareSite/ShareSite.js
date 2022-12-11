@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Image} from "cloudinary-react"
 import axios from "axios";
 import { EmojiArr ,TextSizeArr} from "./MessageTools";
 import "./ShareSite.css"
@@ -10,7 +11,7 @@ const [input,setInput] = useState("")
 const [messageSended,setMessageSended]= useState(false)
 const [emoji,setEmoji]=useState("")
 const [messageTools,setMessageTools]=useState(true)
-const [emojiToll,setEmojiTool]=useState(false)
+const [emojiArr,setEmojiTool]=useState(false)
 const [textToll,setTextTool]=useState(false)
 const [size,setSize]=useState("")
 const [color,setColor] = useState("black")
@@ -90,19 +91,24 @@ async function sendMessageHandler (e){
   return (
     <div className='chat-site'>
       <main className="share-site-main">
-      <section className='section-one'>
+      <section className='share-site-section'>
         {allMessages.map((ms)=>{
           return(<div key={ms._id} className="share-site-sended-message-container">
-
-            <div>{ms.message}</div>
+                <div className="share-site-user-name"> <div>{ms.chatter.userName}</div></div>
+              <div className="share-site-user-img-container">
+              <Image className="share-site-user-image"
+        cloudName= "dqukw0qgs"
+        publicId = { localStorage.getItem("imgId") 
+      }
+      />
+              </div>
+            <div className="user-shared-message">{ms.message}</div>
           </div>
           
           )
         })}
       </section>
-      <section className='section-two'></section>
-      <section className='section-three'></section>
-      <section className='section-four'></section>
+     
       </main>
         <footer className="share-site-footer">
           <div className= "share-site-footer-container"  style={{scale:`${scale? ".8":".4"}`}}> 
@@ -119,11 +125,11 @@ async function sendMessageHandler (e){
                 <div className="emoji-tool" onClick={scale? emojiToolHandler : null}>😀</div> 
                 <input className="color-input" type="color" style={{pointerEvents:`${scale? "auto":"none"}`}} onChange={colorHandler}/>
                 <div className="write-tool" onClick={scale?textToolHandler:null}><i className="fa-solid fa-text-height" style={{color:"#f44336"}}></i></div>
-                <div onClick={codeHandler}><i className="fa-solid fa-code" style={{color:"#673ab7"}}></i></div>
+                <div onClick={codeHandler}><i className="fa-solid fa-code" style={{color:`${code? "#673ab7":"gray"}`}}></i></div>
                 <div className="minimize" onClick={minimizeHandler}><i className="fa-solid fa-down-left-and-up-right-to-center" style={{fontSize:`${scale? "35px":"65px"}`,color:"#2196f3"}}></i></div>
                 
               </>:<>
-              {emojiToll &&  <>
+              {emojiArr &&  <>
             <div className="emoji-container">{EmojiArr.map((emoji,i)=>{
               return(
                 <div key={i} onClick={emojiHandler } className={emoji} >{emoji}</div>

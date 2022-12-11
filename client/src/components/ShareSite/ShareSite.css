@@ -7,20 +7,53 @@
     background-color: #f8f8f8;
 }
 
-.share-site-main > section{
-    width: 95%;
+.share-site-section {
+    width: 75%;
     margin: auto;
-    padding: auto 8%;
+    padding: 3rem;
     height: 71.5vh;
 }
-.section-one{
-   
+.share-site-sended-message-container {
+    display: grid;
+    grid-template-columns: 10% 25% 65%;
+    grid-template-rows: 120px 100%;
+    width: 100%;
+    height: fit-content;
+    margin: 1.5rem auto;
+    padding: 2rem 1rem;
+    border: 1px solid rgb(157, 155, 155);
+    box-shadow: 5px 5px 10px gray;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
 }
-.section-two{
-   
+.share-site-user-img-container {
+    grid-column: 1;
+    grid-row: 1;
 }
-.share-site-footer{
-    background-color: #f8f8f8; 
+.share-site-user-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+}
+.share-site-user-name {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+}
+.user-shared-message {
+    grid-column: 1/-1;
+    grid-row: 2;
+    margin-top: 1.5rem;
+}
+/* Footer CSS */
+.share-site-footer {
+    background-color: #f8f8f8;
 }
 .share-site-footer-container {
     width: 100%;
@@ -32,14 +65,10 @@
     border-radius: 1.6rem;
     -webkit-border-radius: 1.6rem;
     -moz-border-radius: 1.6rem;
-   
-   
-   
 }
 .textarea-container {
     grid-column: 5/20;
     grid-row: 1/9;
-   
 }
 
 .share-site-textarea {
@@ -65,11 +94,9 @@
 }
 .share-site-send-message > i {
     color: gray;
-    
 }
-.share-site-send-message > i:hover{
+.share-site-send-message > i:hover {
     scale: 1.2;
-  
 }
 .message-tool-container {
     grid-column: 1/5;
@@ -85,24 +112,20 @@
 .message-tool-container > div {
     cursor: pointer;
 }
-.message-tool-container > div>i{
-    color:  gray;
-    
-
+.message-tool-container > div > i {
+    color: gray;
 }
-.message-tool-container > div>i:hover {
+.message-tool-container > div > i:hover {
     scale: 1.2;
-   
 }
 @keyframes show {
     to {
         opacity: 1;
     }
 }
-.color-input{
-   
-  border: none;
-  cursor: pointer;
+.color-input {
+    border: none;
+    cursor: pointer;
 }
 .go-back {
     grid-column: 7/8;
