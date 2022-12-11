@@ -18,13 +18,17 @@ const [color,setColor] = useState("black")
 const [scale,setScale]= useState(false)
 const [code,setCode]= useState(false)
 
+// Like-Dislike function
+
+function likeHandler(e){
+  e.target.classList.toggle("blue")
+}
 // Input functions
 useEffect(()=>{
   document.querySelector(".share-site-textarea").focus()
 })
 
   function inputHandler(e){
-    if(code) setInput(`${<pre><code>{e.target.value}</code></pre>}`)
     setInput( e.target.value)
   }
   function emojiHandler(e){
@@ -77,36 +81,47 @@ async function sendMessageHandler (e){
   e.preventDefault()
   const message = {
     userId:localStorage.getItem("userId"),
-    message:input
+    message:input,
+    code:code
   }
   setInput("")
-  setMessageSended(!messageSended)
   try {
     await axios.post(`http://localhost:4000/shareplattform`,message)
   } catch (error) {
     console.log(error)
   }} 
+  setMessageSended(!messageSended)
 }
   console.log("messageSended",messageSended)
+
+
   return (
     <div className='chat-site'>
       <main className="share-site-main">
-      <section className='share-site-section'>
+      <section id="share-site-section" className='share-site-section'>
         {allMessages.map((ms)=>{
           return(<div key={ms._id} className="share-site-sended-message-container">
-                <div className="share-site-user-name"> <div>{ms.chatter.userName}</div></div>
+                <div className="share-site-user-name"> <div>{ms.chatter.userName}</div>
+                <div className="ex-date">{ms.postedOn?ms.postedOn.slice(0,10):""}</div>
+                </div>
+               
               <div className="share-site-user-img-container">
               <Image className="share-site-user-image"
         cloudName= "dqukw0qgs"
-        publicId = { localStorage.getItem("imgId") 
-      }
+        publicId = { ms.chatter.userImage }
       />
               </div>
-            <div className="user-shared-message">{ms.message}</div>
-          </div>
+            <div className="user-shared-message">{ms.code? <pre><code>{ms.message}</code></pre> :<div>{ms.message}</div>}
+            <div className="like-container">
+            <i onClick={likeHandler} className="fa-regular fa-thumbs-up"  ></i>
+             <i onClick={likeHandler} className="fa-regular fa-thumbs-down" ></i>
+            </div>
+            </div>
           
+          </div>
           )
         })}
+        <div className="go-up"><a href="#share-site-section"><i class="fa-solid fa-angles-up"></i></a></div>
       </section>
      
       </main>

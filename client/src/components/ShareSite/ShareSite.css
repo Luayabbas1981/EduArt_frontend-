@@ -12,7 +12,9 @@
     margin: auto;
     padding: 3rem;
     height: 71.5vh;
+    
 }
+
 .share-site-sended-message-container {
     display: grid;
     grid-template-columns: 10% 25% 65%;
@@ -20,12 +22,13 @@
     width: 100%;
     height: fit-content;
     margin: 1.5rem auto;
-    padding: 2rem 1rem;
+    padding: 1rem;
     border: 1px solid rgb(157, 155, 155);
     box-shadow: 5px 5px 10px gray;
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
     -moz-border-radius: 1rem;
+   
 }
 .share-site-user-img-container {
     grid-column: 1;
@@ -42,14 +45,35 @@
     grid-column: 2;
     grid-row: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: x-large;
+}
+.ex-date {
+    font-size: small;
 }
 .user-shared-message {
     grid-column: 1/-1;
     grid-row: 2;
     margin-top: 1.5rem;
+    font-size: large;
+    word-break: break-all;
+}
+.like-container > i {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.blue {
+    color: blue;
+}
+.go-up {
+    position: fixed;
+    top: 70%;
+    left: 90%;
+    font-size: xx-large;
 }
 /* Footer CSS */
 .share-site-footer {
