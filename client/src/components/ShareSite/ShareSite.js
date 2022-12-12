@@ -5,7 +5,7 @@ import { EmojiArr ,TextSizeArr} from "./MessageTools";
 import "./ShareSite.css"
 
 
-function ShareSite() {
+function ShareSite({userProfileData}) {
 const [allMessages,setAllMessages]=useState([])
 const [input,setInput] = useState("")
 const [messageSended,setMessageSended]= useState(false)
@@ -17,52 +17,81 @@ const [size,setSize]=useState("")
 const [color,setColor] = useState("black")
 const [scale,setScale]= useState(false)
 const [code,setCode]= useState(false)
-const[like,setLike]=useState(false)
-const [disLike,setDisLike]=useState(false)
-const [commitEmoji,setCommitEmoji]=useState("")
+const [commentEmojiCon,setCommentEmojiCon]=useState(false)
+const [commentEmoji,setCommentEmoji]=useState("")
+const [emojiId,setEmojiId]=useState("")
 
 // Like-Dislike function
 
 async function likeHandler(e){
-
-
-    setLike(true)
-    console.log("elId",e.target.id)
     e.target.style.color="blue"
-    console.log("like",like)
     const comment ={
-      commenter: localStorage.getItem("userId"), 
-      like:like ,
+      commenter: userProfileData.userName, 
+      like:true ,
+      disLike:false
     }
     try{
       
-      const commentator =    await axios.patch(`http://localhost:4000/shareplattform/${e.target.id}`,comment)
-      console.log("commentator  ",commentator)
+          await axios.patch(`http://localhost:4000/shareplattform/${e.target.id}`,comment)
+      
     }catch (error) {
       console.log("EEError",error)
     }
-
+   
 }
 async function disLikeHandler(e){
-  
-
-    setDisLike(true)
-    console.log("elId",e.target.id)
     e.target.style.color="blue"
-    console.log("disLike",disLike)
     const comment ={
-      commenter: localStorage.getItem("userId"), 
-      disLike:disLike ,
+      commenter: userProfileData.userName, 
+      disLike:true ,
+      like:false
     }
     try{
       
       const commentator =    await axios.patch(`http://localhost:4000/shareplattform/${e.target.id}`,comment)
       console.log("commentator  ",commentator)
     }catch (error) {
-      console.log("EEError",error)
+      console.log("error",error)
     }
 
 }
+
+// commented emoji functions
+
+function showEmojiPanelHandler (e){
+    setCommentEmojiCon(!commentEmojiCon)
+    setEmojiId(e.target.id)
+  }
+  
+function commentEmojiHandler (e){
+  setCommentEmoji(e.target.innerText)
+  setCommentEmojiCon(false)
+}
+useEffect(()=>{
+
+
+  async function commentEmojiPanelHandler(){
+    const comment ={
+      commenter: userProfileData.userName, 
+      emoji:commentEmoji ,
+    }
+   
+    try{
+      
+      await axios.patch(`http://localhost:4000/shareplattform/${emojiId}`,comment)
+     
+    }catch (error) {
+      console.log("error",error)
+    }
+    
+  }
+  if(commentEmoji){
+      
+    commentEmojiPanelHandler()
+  }
+},[commentEmoji])
+
+
 // Input functions
 useEffect(()=>{
   document.querySelector(".share-site-textarea").focus()
@@ -111,10 +140,9 @@ function codeHandler(){
       setAllMessages((allMessages.data).reverse())
     }
     getSharedMessages ()
-  },[messageSended])
+  },[messageSended,commentEmoji])
 
-  console.log("allMessages",allMessages)
-
+  
   // Send message function
 async function sendMessageHandler (e){
    if( input ){ 
@@ -122,7 +150,8 @@ async function sendMessageHandler (e){
   const message = {
     userId:localStorage.getItem("userId"),
     message:input,
-    code:code
+    code:code,
+    color:color
   }
   setInput("")
   try {
@@ -132,17 +161,17 @@ async function sendMessageHandler (e){
   }} 
   setMessageSended(!messageSended)
 }
-  console.log("messageSended",messageSended)
-
-
+ 
+ console.log(commentEmoji)
   return (
     <div className='chat-site'>
       <main className="share-site-main">
       <section id="share-site-section" className='share-site-section'>
         {allMessages.map((ms)=>{
           return(<div key={ms._id} className="share-site-sended-message-container">
-                <div className="share-site-user-name"> <div>{ms.chatter.userName}</div>
-                <div className="ex-date">{ms.postedOn?ms.postedOn.slice(0,10):""}</div>
+                <div className="share-site-user-name"> <div className="chatter-name">{ms.chatter.userName}</div>
+                <div className="ex-date">{ms.postedOn?ms.postedOn.slice(0,10) :""}</div>
+                <div className="ex-time"> at {ms.postedOn?ms.postedOn.slice(11,16) :""}</div>
                 </div>
                
               <div className="share-site-user-img-container">
@@ -151,21 +180,32 @@ async function sendMessageHandler (e){
         publicId = { ms.chatter.userImage }
       />
               </div>
-            <div className="user-shared-message">{ms.code? <pre><code>{ms.message}</code></pre> :<div>{ms.message}</div>}
+            <div className="user-shared-message" style={{color:ms.color}}>{ms.code? <pre><code>{ms.message}</code></pre> :<div>{ms.message}</div>}
             <div className="like-container">
-            <i onClick={likeHandler} className="fa-solid fa-thumbs-up"  id={ms._id} 
+            <i title={ms.commenter} onClick={likeHandler} className="fa-solid fa-thumbs-up"  id={ms._id} 
             style={{color:`${ms.like?"blue":"#bfbcbc"}`}}
             ></i>
-             <i onClick={disLikeHandler} className="fa-solid fa-thumbs-down" id={ms._id}
+             <i title={ms.commenter} onClick={disLikeHandler} className="fa-solid fa-thumbs-down" id={ms._id}
               style={{color:`${ms.disLike?"blue":"#bfbcbc"}`}}
              ></i>
+             <i  className="fa-regular fa-face-smile" id={ms._id} onClick={showEmojiPanelHandler} ></i> {" "}
+             <span className="emoji-span" title={ms.commenter}>{ms.emoji}</span>
             </div>
+            
             </div>
           
           </div>
           )
         })}
-        <div className="go-up"><a href="#share-site-section"><i class="fa-solid fa-angles-up"></i></a></div>
+        <div className="go-up"><a href="#share-site-section"><i className="fa-solid fa-angles-up"></i></a></div>
+        <div className="comment-emoji-container" style={{opacity:`${commentEmojiCon? "1":"0"}`}}>
+        {EmojiArr.map((emoji,i)=>{
+          return(
+            <div key={i} onClick={commentEmojiHandler}>{emoji}</div>
+          )
+        })}
+
+        </div>
       </section>
      
       </main>

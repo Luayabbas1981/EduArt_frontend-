@@ -8,7 +8,7 @@
 }
 
 .share-site-section {
-    width: 75%;
+    width: 95%;
     margin: auto;
     padding: 3rem;
     height: 71.5vh;
@@ -19,7 +19,7 @@
     display: grid;
     grid-template-columns: 10% 25% 65%;
     grid-template-rows: 120px 100%;
-    width: 100%;
+    width: 75%;
     height: fit-content;
     margin: 1.5rem auto;
     padding: 1rem;
@@ -49,16 +49,26 @@
     justify-content: center;
     align-items: center;
     font-size: x-large;
+    color: #7a7878;
+  
 }
-.ex-date {
+.chatter-name{
+    scale: 1.4 .9;
+}
+.ex-date , .ex-time{
     font-size: small;
+    color: rgb(0, 98, 255);
+    scale: 1.4  1;
 }
+
 .user-shared-message {
     grid-column: 1/-1;
     grid-row: 2;
     margin-top: 1.5rem;
     font-size: large;
     word-break: break-all;
+    white-space: wrap;
+    word-wrap: break-word;
 }
 .like-container > i {
     margin-top: 20px;
@@ -66,14 +76,34 @@
     font-size: 20px;
     cursor: pointer;
 }
-.blue {
-    color: blue;
+.emoji-span{
+    cursor: pointer;
 }
 .go-up {
     position: fixed;
     top: 70%;
     left: 90%;
     font-size: xx-large;
+}
+.comment-emoji-container{
+    position: fixed;
+    top: 30%;
+    left: 2%;
+    width: 200px;
+    height: 280px;
+   display: flex;
+   flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+   
+}
+.comment-emoji-container > div{
+    cursor: pointer;
 }
 /* Footer CSS */
 .share-site-footer {
@@ -85,10 +115,11 @@
     display: grid;
     grid-template-columns: repeat(20, calc(100% / 20));
     grid-template-rows: repeat(10, calc(100% / 10));
-    border: 2px solid #036b0c;
+    border: 2px solid #0404db;
     border-radius: 1.6rem;
     -webkit-border-radius: 1.6rem;
     -moz-border-radius: 1.6rem;
+   
 }
 .textarea-container {
     grid-column: 5/20;

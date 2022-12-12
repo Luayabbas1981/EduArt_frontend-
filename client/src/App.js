@@ -202,7 +202,7 @@ function App() {
               }
             />
              <Route path={"/certificates"} element= {<Certificates userProfileData={userProfileData} userPurchases={userPurchases} />}/> 
-             <Route path={"/shareplatform"} element= {<ShareSite />}/> 
+             <Route path={"/shareplatform"} element= {<ShareSite userProfileData={userProfileData}/>}/> 
           </Routes>
         </Router>
       </MyContext.Provider>
