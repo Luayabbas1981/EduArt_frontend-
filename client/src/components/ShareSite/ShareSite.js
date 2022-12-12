@@ -17,11 +17,51 @@ const [size,setSize]=useState("")
 const [color,setColor] = useState("black")
 const [scale,setScale]= useState(false)
 const [code,setCode]= useState(false)
+const[like,setLike]=useState(false)
+const [disLike,setDisLike]=useState(false)
+const [commitEmoji,setCommitEmoji]=useState("")
 
 // Like-Dislike function
 
-function likeHandler(e){
-  e.target.classList.toggle("blue")
+async function likeHandler(e){
+
+
+    setLike(true)
+    console.log("elId",e.target.id)
+    e.target.style.color="blue"
+    console.log("like",like)
+    const comment ={
+      commenter: localStorage.getItem("userId"), 
+      like:like ,
+    }
+    try{
+      
+      const commentator =    await axios.patch(`http://localhost:4000/shareplattform/${e.target.id}`,comment)
+      console.log("commentator  ",commentator)
+    }catch (error) {
+      console.log("EEError",error)
+    }
+
+}
+async function disLikeHandler(e){
+  
+
+    setDisLike(true)
+    console.log("elId",e.target.id)
+    e.target.style.color="blue"
+    console.log("disLike",disLike)
+    const comment ={
+      commenter: localStorage.getItem("userId"), 
+      disLike:disLike ,
+    }
+    try{
+      
+      const commentator =    await axios.patch(`http://localhost:4000/shareplattform/${e.target.id}`,comment)
+      console.log("commentator  ",commentator)
+    }catch (error) {
+      console.log("EEError",error)
+    }
+
 }
 // Input functions
 useEffect(()=>{
@@ -113,8 +153,12 @@ async function sendMessageHandler (e){
               </div>
             <div className="user-shared-message">{ms.code? <pre><code>{ms.message}</code></pre> :<div>{ms.message}</div>}
             <div className="like-container">
-            <i onClick={likeHandler} className="fa-regular fa-thumbs-up"  ></i>
-             <i onClick={likeHandler} className="fa-regular fa-thumbs-down" ></i>
+            <i onClick={likeHandler} className="fa-solid fa-thumbs-up"  id={ms._id} 
+            style={{color:`${ms.like?"blue":"#bfbcbc"}`}}
+            ></i>
+             <i onClick={disLikeHandler} className="fa-solid fa-thumbs-down" id={ms._id}
+              style={{color:`${ms.disLike?"blue":"#bfbcbc"}`}}
+             ></i>
             </div>
             </div>
           
