@@ -70,7 +70,7 @@
     white-space: wrap;
     word-wrap: break-word;
 }
-.like-container > i {
+.like-emoji-container > i {
     margin-top: 20px;
     margin-left: 20px;
     font-size: 20px;
@@ -78,6 +78,11 @@
 }
 .emoji-span{
     cursor: pointer;
+}
+.dislike-counter ,.like-counter{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    color: tomato;
 }
 .go-up {
     position: fixed;

@@ -20,6 +20,9 @@ const [code,setCode]= useState(false)
 const [commentEmojiCon,setCommentEmojiCon]=useState(false)
 const [commentEmoji,setCommentEmoji]=useState("")
 const [emojiId,setEmojiId]=useState("")
+const [like,setLike] = useState(false)
+const [emojis,setEmojis]= useState([])
+
 
 // Like-Dislike function
 
@@ -27,8 +30,8 @@ async function likeHandler(e){
     e.target.style.color="blue"
     const comment ={
       commenter: userProfileData.userName, 
-      like:true ,
-      disLike:false
+      like:true 
+     
     }
     try{
       
@@ -37,14 +40,14 @@ async function likeHandler(e){
     }catch (error) {
       console.log("EEError",error)
     }
-   
+    setLike(!like)
 }
 async function disLikeHandler(e){
     e.target.style.color="blue"
     const comment ={
       commenter: userProfileData.userName, 
-      disLike:true ,
-      like:false
+      disLike:true 
+     
     }
     try{
       
@@ -53,7 +56,7 @@ async function disLikeHandler(e){
     }catch (error) {
       console.log("error",error)
     }
-
+    setLike(!like)
 }
 
 // commented emoji functions
@@ -67,13 +70,22 @@ function commentEmojiHandler (e){
   setCommentEmoji(e.target.innerText)
   setCommentEmojiCon(false)
 }
+
+
 useEffect(()=>{
 
 
   async function commentEmojiPanelHandler(){
+
+    const emojiArr = allMessages.filter((el)=>{
+      return el = el._id === emojiId
+    })
+    setEmojis(emojiArr)
+    
     const comment ={
-      commenter: userProfileData.userName, 
-      emoji:commentEmoji ,
+     /*  commenter: userProfileData.userName,  */
+      emoji:[...emojiArr[0].emoji,{commenter:userProfileData.userName,emojiType:commentEmoji
+      }],
     }
    
     try{
@@ -140,8 +152,8 @@ function codeHandler(){
       setAllMessages((allMessages.data).reverse())
     }
     getSharedMessages ()
-  },[messageSended,commentEmoji])
-
+  },[messageSended,commentEmoji,emojis,like])
+  console.log(allMessages)
   
   // Send message function
 async function sendMessageHandler (e){
@@ -181,15 +193,26 @@ async function sendMessageHandler (e){
       />
               </div>
             <div className="user-shared-message" style={{color:ms.color}}>{ms.code? <pre><code>{ms.message}</code></pre> :<div>{ms.message}</div>}
-            <div className="like-container">
+            <div className="like-emoji-container">
+              
             <i title={ms.commenter} onClick={likeHandler} className="fa-solid fa-thumbs-up"  id={ms._id} 
             style={{color:`${ms.like?"blue":"#bfbcbc"}`}}
-            ></i>
+            ></i>{" "}
+            <span className="like-counter">{ms.like}</span>
              <i title={ms.commenter} onClick={disLikeHandler} className="fa-solid fa-thumbs-down" id={ms._id}
               style={{color:`${ms.disLike?"blue":"#bfbcbc"}`}}
-             ></i>
+             ></i> <span className="dislike-counter">{ms.disLike}</span>
+            
+            
              <i  className="fa-regular fa-face-smile" id={ms._id} onClick={showEmojiPanelHandler} ></i> {" "}
-             <span className="emoji-span" title={ms.commenter}>{ms.emoji}</span>
+
+
+             {ms.emoji.map((el ,i)=>{
+              return(
+
+                <span key={i} className="emoji-span" title={el.commenter}>{el.emojiType}</span> 
+              )
+             })}
             </div>
             
             </div>
