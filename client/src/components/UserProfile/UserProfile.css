@@ -374,6 +374,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.purchase-course-price{
+  grid-column: 1/3;
+  grid-row: 4;
+  
+}
 .pdf-symbol {
   width: 100%;
   text-align: center;
