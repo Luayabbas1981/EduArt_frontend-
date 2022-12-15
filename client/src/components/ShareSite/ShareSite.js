@@ -198,10 +198,10 @@ async function sendMessageHandler (e){
             <i title={ms.commenter} onClick={likeHandler} className="fa-solid fa-thumbs-up"  id={ms._id} 
             style={{color:`${ms.like?"blue":"#bfbcbc"}`}}
             ></i>{" "}
-            <span className="like-counter">{ms.like}</span>
+            <span className="like-counter"  style={{color:`${ms.like?"tomato":"gray"}`}}>{ms.like}</span>
              <i title={ms.commenter} onClick={disLikeHandler} className="fa-solid fa-thumbs-down" id={ms._id}
               style={{color:`${ms.disLike?"blue":"#bfbcbc"}`}}
-             ></i> <span className="dislike-counter">{ms.disLike}</span>
+             ></i> <span className="dislike-counter" style={{color:`${ms.disLike?"tomato":"gray"}`}}>{ms.disLike}</span>
             
             
              <i  className="fa-regular fa-face-smile" id={ms._id} onClick={showEmojiPanelHandler} ></i> {" "}
