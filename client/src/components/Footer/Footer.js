@@ -31,6 +31,10 @@ function Footer() {
           />
         );
       }, 900);
+      setTimeout(()=>{
+
+        setChatForm(false)
+      },2600)
       messageText.value = "";
     } else {
       return;
